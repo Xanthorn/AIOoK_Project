@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FilmShow.Api.Controllers
+namespace Cinema.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]

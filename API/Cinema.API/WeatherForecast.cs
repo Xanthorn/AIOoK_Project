@@ -1,6 +1,6 @@
 using System;
 
-namespace FilmShow.Api
+namespace Cinema.API
 {
     public class WeatherForecast
     {
