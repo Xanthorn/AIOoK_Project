@@ -8,7 +8,16 @@
 
         public static class Movie
         {
-            public const string MovieBase = Base + "/movies";
+            private const string MovieBase = Base + "/movies";
+
+            public const string Create = MovieBase;
+        }
+
+        public static class Shows
+        {
+            private const string ShowsBase = Base + "/shows";
+
+            public const string GetShowByDay = ShowsBase + "/{year}/{month}/{day}";
         }
     }
 }
