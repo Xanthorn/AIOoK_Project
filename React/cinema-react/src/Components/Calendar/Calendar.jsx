@@ -56,7 +56,7 @@ export default function Calendar() {
 
     return (
         <div className="container">
-            <div className="row">
+            <div className="row pb-4">
                 <div className="col">
                     <h1 className="display-4 text-center">Kalendarz</h1>
                 </div>
