@@ -19,7 +19,7 @@ namespace Cinema.API.Controllers
             _moviesService = new MoviesService(_dataContext);
         }
 
-        [HttpPost(ApiRoutes.Movie.MovieBase)]
+        [HttpPost(ApiRoutes.Movie.Create)]
         public async Task<IActionResult> AddMovie([FromBody] CreateMovieRequest request)
         {
             var result = await _moviesService.AddMovie(request);
