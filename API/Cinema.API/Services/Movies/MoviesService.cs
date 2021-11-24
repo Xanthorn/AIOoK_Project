@@ -44,5 +44,32 @@ namespace Cinema.API.Services.Movies
 
             return response;
         }
+        public async Task<EditMovieResponse> EditMovie(Guid id, EditMovieRequest request)
+        {
+            var movieToEdit = await _dataContext.Movies.FindAsync(id);
+
+            movieToEdit.Title = request.Title;
+            movieToEdit.DurationHours = request.DurationHours;
+            movieToEdit.DurationMinutes = request.DurationMinutes;
+
+            _dataContext.Movies.Update(movieToEdit);
+
+            int result = await _dataContext.SaveChangesAsync();
+
+            EditMovieResponse response = new();
+
+            if (result > 0)
+            {
+                response.Message = "Movie edited succesfully";
+            }
+
+            else
+            {
+                response.Message = "Internal server error";
+                response.ErrorCode = 500;
+            }
+
+            return response;
+        }
     }
 }

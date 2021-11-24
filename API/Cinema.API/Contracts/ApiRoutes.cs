@@ -12,7 +12,7 @@
 
             public const string Create = MovieBase;
 
-            public const string Edit = MovieBase + "/edit";
+            public const string Edit = MovieBase + "/edit/{id}";
         }
 
         public static class Shows

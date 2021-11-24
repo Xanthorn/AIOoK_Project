@@ -3,6 +3,7 @@ using Cinema.API.Contracts.Requests.Movies;
 using Cinema.API.Services.Movies;
 using Cinema.DB;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Cinema.API.Controllers
@@ -36,9 +37,9 @@ namespace Cinema.API.Controllers
         }
 
         [HttpPatch(ApiRoutes.Movie.Edit)]
-        public async Task<IActionResult> EditMovie([FromBody] EditMovieRequest request)
+        public async Task<IActionResult> EditMovie([FromRoute] Guid id, [FromBody] EditMovieRequest request)
         {
-            var result = await _moviesService.EditMovie(request);
+            var result = await _moviesService.EditMovie(id, request);
 
             if (result.ErrorCode == -1)
             {
