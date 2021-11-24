@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "./Calendar.css";
 
 export default function Calendar() {
 
-    const[year, setYear] = useState(0);
-    const[month, setMonth] = useState(0);
+    const [actualYear, setYear] = useState(0);
+    const [actualMonth, setMonth] = useState(0);
 
     const [daysInMonth, setDaysInMonth] = useState(0);
     const [firstDayOfMonth, setFirstDayOfMonth] = useState(0);
@@ -13,7 +15,7 @@ export default function Calendar() {
             const date = new Date();
 
             setYear(date.getFullYear());
-            setMonth(date.getMonth());
+            setMonth(date.getMonth() + 1);
 
             const days = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
             const firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
@@ -27,18 +29,26 @@ export default function Calendar() {
     function drawCalendar() {
         let month = [];
         let week = [];
-        for(let i = 1; i < daysInMonth + firstDayOfMonth; i++) {
-            if(i < firstDayOfMonth) {
+        for (let i = 1; i < daysInMonth + firstDayOfMonth; i++) {
+            if (i < firstDayOfMonth) {
                 week.push(<td className="col-1 text-center"></td>)
             }
 
-            week.push(<td className="col-1 text-center">{i}</td>)
+            week.push(<td className="col-1 text-center"><Link to={`/calendar/${actualYear}/${actualMonth}/${i}`}><p className="display-5">{i}</p></Link></td>)
 
-            if(i % 7 === 0) {
+            if (i % 7 === 0) {
                 month.push(<tr>{week}</tr>)
                 week = [];
             }
         }
+
+        if (week.length < 7) {
+            const missingDays = 7 - week.length;
+            for (let i = 0; i < missingDays; i++) {
+                week.push(<td className="col-1 text-center"></td>)
+            }
+        }
+
         month.push(<tr>{week}</tr>)
 
         return month;

@@ -4,6 +4,7 @@ import Home from './Components/Home';
 import Movies from './Components/Movies/Movies';
 import Shows from './Components/Shows/Shows';
 import Calendar from './Components/Calendar/Calendar';
+import DayInCalendar from './Components/Calendar/DayInCalendar';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               <Route path="/movies" element={<Movies />} />
               <Route path="/shows" element={<Shows />} />
               <Route path="/calendar" element={<Calendar />} />
+              <Route path="/calendar/:year/:month/:day" element={<DayInCalendar />}/>
             </Routes>
           </div>
         </div>
