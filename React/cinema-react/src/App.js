@@ -16,9 +16,9 @@ function App() {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <Link className="nav-link" to="/movies/">Filmy</Link>
-              <Link className="nav-link" to="/shows/">Seanse</Link>
-              <Link className="nav-link" to="/calendar/">Kalendarz</Link>
+              <Link className="nav-link" to="/movies">Filmy</Link>
+              <Link className="nav-link" to="/shows">Seanse</Link>
+              <Link className="nav-link" to="/calendar">Kalendarz</Link>
             </div>
           </div>
         </div>
@@ -28,9 +28,9 @@ function App() {
           <div className="col">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/movies/" element={<Movies />} />
-              <Route path="/shows/" element={<Shows />} />
-              <Route path="/calendar/" element={<Calendar />} />
+              <Route path="/movies" element={<Movies />} />
+              <Route path="/shows" element={<Shows />} />
+              <Route path="/calendar" element={<Calendar />} />
             </Routes>
           </div>
         </div>
