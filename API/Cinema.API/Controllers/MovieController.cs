@@ -34,5 +34,21 @@ namespace Cinema.API.Controllers
                 return StatusCode(result.ErrorCode, result.Message);
             }
         }
+
+        [HttpPatch(ApiRoutes.Movie.Edit)]
+        public async Task<IActionResult> EditMovie([FromBody] EditMovieRequest request)
+        {
+            var result = await _moviesService.EditMovie(request);
+
+            if (result.ErrorCode == -1)
+            {
+                return Ok(result.Message);
+            }
+
+            else
+            {
+                return StatusCode(result.ErrorCode, result.Message);
+            }
+        }
     }
 }
