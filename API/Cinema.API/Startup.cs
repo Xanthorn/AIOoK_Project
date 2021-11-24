@@ -29,6 +29,14 @@ namespace Cinema.API
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddCors(options =>
+                options.AddPolicy("DefaultCorsPolicy", builder => builder
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowAnyOrigin()
+                )
+            );
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -54,6 +62,8 @@ namespace Cinema.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("DefaultCorsPolicy");
 
             app.UseAuthorization();
 
