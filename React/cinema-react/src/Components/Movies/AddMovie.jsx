@@ -28,7 +28,7 @@ class AddMovie extends Component {
                             <input type="text" className="form-control form-control-lg form" id="duration" placeholder="Czas trwania" onChange={(e) => this.onChange(e)} />
                         </td>
                         <td>
-                            <button className="btn btn-lg btn-outline-dark" onClick={() => this.props.addMovie(this.state)}>Dodaj produkt</button>
+                            <button className="btn btn-lg btn-outline-dark" onClick={() => this.props.addMovie(this.state)}>Dodaj film</button>
                         </td>
                     </tr>
                 </tbody>
