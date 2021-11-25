@@ -3,6 +3,7 @@ using Cinema.API.Contracts.Requests.Movies;
 using Cinema.API.Services.Movies;
 using Cinema.DB;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Cinema.API.Controllers
@@ -23,6 +24,22 @@ namespace Cinema.API.Controllers
         public async Task<IActionResult> AddMovie([FromBody] CreateMovieRequest request)
         {
             var result = await _moviesService.AddMovie(request);
+
+            if (result.ErrorCode == -1)
+            {
+                return Ok(result.Message);
+            }
+
+            else
+            {
+                return StatusCode(result.ErrorCode, result.Message);
+            }
+        }
+
+        [HttpPut(ApiRoutes.Movie.Edit)]
+        public async Task<IActionResult> EditMovie([FromRoute] Guid id, [FromBody] EditMovieRequest request)
+        {
+            var result = await _moviesService.EditMovie(id, request);
 
             if (result.ErrorCode == -1)
             {

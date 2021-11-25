@@ -11,6 +11,8 @@
             private const string MovieBase = Base + "/movies";
 
             public const string Create = MovieBase;
+
+            public const string Edit = MovieBase + "/{id}";
         }
 
         public static class Shows
