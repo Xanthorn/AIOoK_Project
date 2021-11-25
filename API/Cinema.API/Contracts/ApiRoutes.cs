@@ -13,6 +13,8 @@
             public const string Create = MovieBase;
 
             public const string Edit = MovieBase + "/{id}";
+
+            public const string Delete = MovieBase + "/{id}";
         }
 
         public static class Shows
