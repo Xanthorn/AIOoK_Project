@@ -1,10 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Show from "../Shows/Show";
+import ShowsService from "../../Services/ShowsService";
 
 export default function DayInCalendar() {
     const { year, month, day } = useParams();
     const [shows, setShows] = useState([]);
+
+    useEffect(function effectFunction() {
+        async function fetchShows() {
+            fetchedShows = [];
+
+            const showsService = new ShowsService();
+
+            const fetchedShows = await showsService.getShowsByDate(Number(year), Number(month), Number(day));
+
+            if(fetchedShows.length > 0) {
+                setShows(fetchedShows);
+            }
+        }
+        
+        fetchShows();
+
+    }, [year, month, day, setShows]);
 
     return (
         <div className="container">
