@@ -36,7 +36,7 @@ namespace Cinema.API.Controllers
             }
         }
 
-        [HttpPatch(ApiRoutes.Movie.Edit)]
+        [HttpPut(ApiRoutes.Movie.Edit)]
         public async Task<IActionResult> EditMovie([FromRoute] Guid id, [FromBody] EditMovieRequest request)
         {
             var result = await _moviesService.EditMovie(id, request);
