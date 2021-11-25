@@ -46,29 +46,34 @@ namespace Cinema.API.Services.Movies
         }
         public async Task<EditMovieResponse> EditMovie(Guid id, EditMovieRequest request)
         {
-            var movieToEdit = await _dataContext.Movies.FindAsync(id);
-
-            movieToEdit.Title = request.Title;
-            movieToEdit.DurationHours = request.DurationHours;
-            movieToEdit.DurationMinutes = request.DurationMinutes;
-
-            _dataContext.Movies.Update(movieToEdit);
-
-            int result = await _dataContext.SaveChangesAsync();
+            Movie existingMovie = await _dataContext.Movies.FindAsync(id);
 
             EditMovieResponse response = new();
 
-            if (result > 0)
+            if (existingMovie == null)
             {
-                response.Message = "Movie edited succesfully";
+                response.Message = "There is no product with given Id";
+                response.ErrorCode = 404;
             }
-
             else
             {
-                response.Message = "Internal server error";
-                response.ErrorCode = 500;
-            }
+                existingMovie.Title = request.Title;
+                existingMovie.DurationHours = request.DurationHours;
+                existingMovie.DurationMinutes = request.DurationMinutes;
 
+                int result = await _dataContext.SaveChangesAsync();
+
+                if (result > 0)
+                {
+                    response.Message = "Movie has been edited succesfully";
+                }
+
+                else
+                {
+                    response.Message = "Internal server error";
+                    response.ErrorCode = 500;
+                }
+            }
             return response;
         }
     }
