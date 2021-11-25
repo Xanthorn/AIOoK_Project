@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Cinema.API.Contracts.Requests.Movies
+﻿namespace Cinema.API.Contracts.Requests.Movies
 {
     public class EditMovieRequest
     {
