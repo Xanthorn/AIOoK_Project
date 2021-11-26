@@ -10,14 +10,12 @@ export default class ShowsService {
 
     async getShowsByDate(year, month, day) {
         try {
-            let shows = [];
-
             const response = await axios.get(`${url}/${year}/${month}/${day}`);
-            shows = response.data.shows;
 
-            return shows;
+            return response.data;
         }
         catch (e) {
+            console.error(e.response.data);
             return [];
         }
     }
