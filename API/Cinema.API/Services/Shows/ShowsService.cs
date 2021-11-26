@@ -27,8 +27,12 @@ namespace Cinema.API.Services.Shows
 
             if (auditorium == null)
             {
-                response.Message = "There is no auditorium with given Id";
-                response.ErrorCode = 404;
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no auditorium with given Id",
+                    ErrorCode = 404
+                };
+
                 return response;
             }
 
@@ -36,8 +40,12 @@ namespace Cinema.API.Services.Shows
 
             if (movie == null)
             {
-                response.Message = "There is no movie with given Id";
-                response.ErrorCode = 404;
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no movie with given Id",
+                    ErrorCode = 404,
+                };
+
                 return response;
             }
 
@@ -69,13 +77,15 @@ namespace Cinema.API.Services.Shows
             if (result > 0)
             {
                 response.ShowId = show.Id;
-                response.Message = "Show added succesfully";
             }
 
             else
             {
-                response.Message = "Internal server error";
-                response.ErrorCode = 500;
+                response.ErrorResponse = new()
+                {
+                    Message = "Internal server error",
+                    ErrorCode = 500
+                };
             }
 
             return response;
