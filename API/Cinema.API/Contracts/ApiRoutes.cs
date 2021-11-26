@@ -22,7 +22,7 @@
 
             public const string Create = ShowsBase;
 
-            public const string GetShowByDay = ShowsBase + "/{year}/{month}/{day}";
+            public const string GetShowByDate = ShowsBase + "/{year}/{month}/{day}";
         }
     }
 }

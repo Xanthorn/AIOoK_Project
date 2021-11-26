@@ -52,7 +52,7 @@ namespace Cinema.API.Controllers
             }
         }
 
-        [HttpDelete(ApiRoutes.Movie.Delete)]
+        [HttpDelete(ApiRoutes.Movies.Delete)]
         public async Task<IActionResult> DeleteMovie([FromRoute] Guid id)
         {
             var result = await _moviesService.DeleteMovie(id);

@@ -36,7 +36,7 @@ namespace Cinema.API.Controllers
             }
         }
 
-        [HttpGet(ApiRoutes.Shows.GetShowByDay)]
+        [HttpGet(ApiRoutes.Shows.GetShowByDate)]
         public async Task<IActionResult> GetShowsByDate([FromRoute] int year, [FromRoute] int month, [FromRoute] int day)
         {
             GetShowsByDateRequest request = new()
