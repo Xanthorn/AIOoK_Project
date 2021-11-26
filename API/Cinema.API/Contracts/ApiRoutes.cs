@@ -20,6 +20,8 @@
             private const string ShowsBase = Base + "/shows";
 
             public const string GetShowByDay = ShowsBase + "/{year}/{month}/{day}";
+
+            public const string Edit = ShowsBase + "/{id}";
         }
     }
 }

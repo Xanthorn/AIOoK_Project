@@ -3,6 +3,7 @@ using Cinema.API.Contracts.Requests.Shows;
 using Cinema.API.Services.Shows;
 using Cinema.DB;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Cinema.API.Controllers
@@ -39,6 +40,22 @@ namespace Cinema.API.Controllers
             else
             {
                 return StatusCode(result.ErrorCode);
+            }
+        }
+
+        [HttpPatch(ApiRoutes.Shows.Edit)]
+        public async Task<IActionResult> EditShow([FromRoute] Guid id, [FromBody] EditShowRequest request)
+        {
+            var result = await _showsService.EditShow(id, request);
+
+            if (result.ErrorCode == -1)
+            {
+                return Ok(result.Message);
+            }
+
+            else
+            {
+                return StatusCode(result.ErrorCode, result.Message);
             }
         }
     }
