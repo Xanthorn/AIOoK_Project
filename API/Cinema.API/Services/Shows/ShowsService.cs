@@ -121,6 +121,8 @@ namespace Cinema.API.Services.Shows
 
         public async Task<EditShowResponse> EditShow(Guid id, EditShowRequest request)
         {
+            EditShowResponse response = new();
+
             Show existingShow = await _dataContext.Shows
                 .Include(s => s.Movie)
                 .Include(s => s.Auditorium)
@@ -128,55 +130,80 @@ namespace Cinema.API.Services.Shows
                 .Where(s => s.Id == id)
                 .FirstOrDefaultAsync();
 
-            Movie existingMovie = await _dataContext.Movies.FindAsync(request.MovieId);
-
-            Auditorium existingAuditorium = await _dataContext.Auditoriums.FindAsync(request.AuditoriumId);
-
-            EditShowResponse response = new();
-
             if (existingShow == null)
             {
                 response.Message = "There is no show with given Id";
                 response.ErrorCode = 404;
+                return response;
             }
-            else if (existingMovie == null)
+
+            Movie existingMovie = await _dataContext.Movies.FindAsync(request.MovieId);
+
+            if (existingMovie == null)
             {
                 response.Message = "There is no movie with given Id";
                 response.ErrorCode = 404;
+                return response;
             }
-            else if (existingAuditorium == null)
+
+            Auditorium existingAuditorium = await _dataContext.Auditoriums.FindAsync(request.AuditoriumId);
+
+            if (existingAuditorium == null)
             {
                 response.Message = "There is no auditorium with given Id";
                 response.ErrorCode = 404;
+                return response;
             }
-            else if (existingShow.Auditorium.Equals(existingAuditorium))
+
+            if (existingShow.Auditorium == existingAuditorium)
             {
                 existingShow.Date = DateTime.Parse(request.Date);
                 existingShow.Movie = existingMovie;
             }
-            else if (!existingShow.Auditorium.Equals(existingAuditorium) && existingShow.SoldTickets == 0)
+
+            else if (existingShow.Auditorium != existingAuditorium && existingShow.SoldTickets == 0)
             {
                 existingShow.Date = DateTime.Parse(request.Date);
                 existingShow.Movie = existingMovie;
                 existingShow.Auditorium = existingAuditorium;
 
-                existingShow.Seats = new List<Seat>();
-
-                for (int i = 0; i < existingShow.Auditorium.Capacity; i++)
+                if (existingShow.Seats.Count > existingAuditorium.Capacity)
                 {
-                    Seat seat = new()
-                    {
-                        Id = Guid.NewGuid(),
-                        IsTaken = false,
-                    };
+                    int seatsToDelete = existingShow.Seats.Count - existingAuditorium.Capacity;
 
-                    existingShow.Seats.Add(seat);
+                    for (int i = 0; i < seatsToDelete; i++)
+                    {
+                        Seat seatToDelete = existingShow.Seats.FirstOrDefault();
+                        existingShow.Seats.Remove(seatToDelete);
+                        _dataContext.Seats.Remove(seatToDelete);
+                    }
+
+                    existingShow.AvailableTickets -= seatsToDelete;
+                }
+
+                else
+                {
+                    int seatsToCreate = existingAuditorium.Capacity - existingShow.Seats.Count;
+
+                    for (int i = 0; i < seatsToCreate; i++)
+                    {
+                        Seat seat = new()
+                        {
+                            Id = Guid.NewGuid()
+                        };
+
+                        await _dataContext.Seats.AddAsync(seat);
+                        existingShow.Seats.Add(seat);
+                    }
+
+                    existingShow.AvailableTickets += seatsToCreate;
                 }
             }
-            else if (!existingShow.Auditorium.Equals(existingAuditorium) && existingShow.SoldTickets != 0)
+
+            else if (existingShow.Auditorium != existingAuditorium && existingShow.SoldTickets != 0)
             {
-                response.Message = "Auditorium can not be changed when someone buy a ticket";
-                response.ErrorCode = 304;
+                response.Message = "Auditorium can not be changed when someone bought a ticket";
+                response.ErrorCode = 405;
             }
 
             int result = await _dataContext.SaveChangesAsync();
@@ -185,7 +212,8 @@ namespace Cinema.API.Services.Shows
             {
                 response.Message = "Show has been edited succesfully";
             }
-            else if(response.Message == null)
+
+            else
             {
                 response.Message = "Internal server error";
                 response.ErrorCode = 500;
