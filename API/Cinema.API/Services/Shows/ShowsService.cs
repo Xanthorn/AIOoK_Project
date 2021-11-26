@@ -155,7 +155,7 @@ namespace Cinema.API.Services.Shows
                 existingShow.Movie = existingMovie;
                 existingShow.Auditorium = existingAuditorium;
 
-                existingShow.IsSeatTaken = new List<Seat>();
+                existingShow.Seats = new List<Seat>();
 
                 for (int i = 0; i < existingShow.Auditorium.Capacity; i++)
                 {
@@ -165,7 +165,7 @@ namespace Cinema.API.Services.Shows
                         IsTaken = false,
                     };
 
-                    existingShow.IsSeatTaken.Add(seat);
+                    existingShow.Seats.Add(seat);
                 }
             }
             else if (!existingShow.Auditorium.Equals(existingAuditorium) && existingShow.SoldTickets != 0)
