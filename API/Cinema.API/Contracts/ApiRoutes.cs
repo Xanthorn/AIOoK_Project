@@ -6,22 +6,25 @@
         public const string Root = "api";
         public const string Base = Root + "/" + Version;
 
-        public static class Movie
+        public static class Movies
         {
-            private const string MovieBase = Base + "/movies";
+            private const string MoviesBase = Base + "/movies";
 
-            public const string Create = MovieBase;
+            public const string Create = MoviesBase;
 
-            public const string Edit = MovieBase + "/{id}";
+            public const string Delete = MoviesBase + "/{id}";
+            public const string Edit = MoviesBase + "/{id}";
         }
 
         public static class Shows
         {
             private const string ShowsBase = Base + "/shows";
 
-            public const string GetShowByDay = ShowsBase + "/{year}/{month}/{day}";
-
             public const string Edit = ShowsBase + "/{id}";
+
+            public const string Create = ShowsBase;
+
+            public const string GetShowByDate = ShowsBase + "/{year}/{month}/{day}";
         }
     }
 }
