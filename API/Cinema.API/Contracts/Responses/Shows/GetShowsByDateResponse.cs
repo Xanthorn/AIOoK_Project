@@ -1,4 +1,5 @@
-﻿using Cinema.DB.Models;
+﻿using Cinema.API.Contracts.Responses.Common;
+using Cinema.DB.Models;
 using System.Collections.Generic;
 
 namespace Cinema.API.Contracts.Responses.Shows
@@ -6,6 +7,6 @@ namespace Cinema.API.Contracts.Responses.Shows
     public class GetShowsByDateResponse
     {
         public List<Show> Shows { get; set; }
-        public int ErrorCode { get; set; } = -1;
+        public ErrorResponse ErrorResponse { get; set; }
     }
 }

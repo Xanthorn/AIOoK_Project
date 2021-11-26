@@ -104,7 +104,11 @@ namespace Cinema.API.Services.Shows
 
             if (shows.Count == 0)
             {
-                response.ErrorCode = 404;
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no shows at given date",
+                    ErrorCode = 404
+                };
             }
 
             else

@@ -48,14 +48,14 @@ namespace Cinema.API.Controllers
 
             var result = await _showsService.GetShowsByDate(request);
 
-            if (result.ErrorCode == -1)
+            if (result.ErrorResponse == null)
             {
                 return Ok(result.Shows);
             }
 
             else
             {
-                return StatusCode(result.ErrorCode);
+                return StatusCode(result.ErrorResponse.ErrorCode, result.ErrorResponse.Message);
             }
         }
     }
