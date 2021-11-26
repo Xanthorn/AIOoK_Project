@@ -20,7 +20,7 @@ namespace Cinema.API.Controllers
             _moviesService = new MoviesService(_dataContext);
         }
 
-        [HttpPost(ApiRoutes.Movie.Create)]
+        [HttpPost(ApiRoutes.Movies.Create)]
         public async Task<IActionResult> AddMovie([FromBody] CreateMovieRequest request)
         {
             var result = await _moviesService.AddMovie(request);
@@ -36,7 +36,7 @@ namespace Cinema.API.Controllers
             }
         }
 
-        [HttpPut(ApiRoutes.Movie.Edit)]
+        [HttpPut(ApiRoutes.Movies.Edit)]
         public async Task<IActionResult> EditMovie([FromRoute] Guid id, [FromBody] EditMovieRequest request)
         {
             var result = await _moviesService.EditMovie(id, request);

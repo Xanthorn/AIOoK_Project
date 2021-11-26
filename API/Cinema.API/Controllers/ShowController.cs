@@ -1,5 +1,6 @@
 ﻿using Cinema.API.Contracts;
 using Cinema.API.Contracts.Requests.Shows;
+using Cinema.API.Contracts.Responses.Shows;
 using Cinema.API.Services.Shows;
 using Cinema.DB;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,22 @@ namespace Cinema.API.Controllers
         {
             _dataContext = dataContext;
             _showsService = new ShowsService(_dataContext);
+        }
+
+        [HttpPost(ApiRoutes.Shows.Create)]
+        public async Task<IActionResult> CreateShow([FromBody] CreateShowRequest request)
+        {
+            CreateShowResponse result = await _showsService.CreateShow(request);
+
+            if (result.ErrorResponse == null)
+            {
+                return Ok(result.ShowId);
+            }
+
+            else
+            {
+                return StatusCode(result.ErrorResponse.ErrorCode, result.ErrorResponse.Message);
+            }
         }
 
         [HttpGet(ApiRoutes.Shows.GetShowByDay)]
