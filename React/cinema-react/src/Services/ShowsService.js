@@ -18,7 +18,7 @@ export default class ShowsService {
             return shows;
         }
         catch (e) {
-            console.error(e);
+            return [];
         }
     }
 

@@ -10,5 +10,6 @@ namespace Cinema.DB
         public DbSet<Auditorium> Auditoriums { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Show> Shows { get; set; }
+        public DbSet<Seat> Seats { get; set; }
     }
 }

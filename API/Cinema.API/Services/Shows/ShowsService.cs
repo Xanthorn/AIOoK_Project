@@ -118,5 +118,129 @@ namespace Cinema.API.Services.Shows
 
             return response;
         }
+
+        public async Task<EditShowResponse> EditShow(Guid id, EditShowRequest request)
+        {
+            EditShowResponse response = new();
+
+            Show existingShow = await _dataContext.Shows
+                .Include(s => s.Movie)
+                .Include(s => s.Auditorium)
+                .Include(s => s.Seats)
+                .Where(s => s.Id == id)
+                .FirstOrDefaultAsync();
+
+            if (existingShow == null)
+            {
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no show with given Id",
+                    ErrorCode = 404
+                };
+
+                return response;
+            }
+
+            Movie existingMovie = await _dataContext.Movies.FindAsync(request.MovieId);
+
+            if (existingMovie == null)
+            {
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no movie with given Id",
+                    ErrorCode = 404
+                };
+
+                return response;
+            }
+
+            Auditorium existingAuditorium = await _dataContext.Auditoriums.FindAsync(request.AuditoriumId);
+
+            if (existingAuditorium == null)
+            {
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no auditorium with given Id",
+                    ErrorCode = 404
+                };
+
+                return response;
+            }
+
+            if (existingShow.Auditorium == existingAuditorium)
+            {
+                existingShow.Date = DateTime.Parse(request.Date);
+                existingShow.Movie = existingMovie;
+            }
+
+            else if (existingShow.Auditorium != existingAuditorium && existingShow.SoldTickets == 0)
+            {
+                existingShow.Date = DateTime.Parse(request.Date);
+                existingShow.Movie = existingMovie;
+                existingShow.Auditorium = existingAuditorium;
+
+                if (existingShow.Seats.Count > existingAuditorium.Capacity)
+                {
+                    int seatsToDelete = existingShow.Seats.Count - existingAuditorium.Capacity;
+
+                    for (int i = 0; i < seatsToDelete; i++)
+                    {
+                        Seat seatToDelete = existingShow.Seats.FirstOrDefault();
+                        existingShow.Seats.Remove(seatToDelete);
+                        _dataContext.Seats.Remove(seatToDelete);
+                    }
+
+                    existingShow.AvailableTickets -= seatsToDelete;
+                }
+
+                else
+                {
+                    int seatsToCreate = existingAuditorium.Capacity - existingShow.Seats.Count;
+
+                    for (int i = 0; i < seatsToCreate; i++)
+                    {
+                        Seat seat = new()
+                        {
+                            Id = Guid.NewGuid()
+                        };
+
+                        await _dataContext.Seats.AddAsync(seat);
+                        existingShow.Seats.Add(seat);
+                    }
+
+                    existingShow.AvailableTickets += seatsToCreate;
+                }
+            }
+
+            else if (existingShow.Auditorium != existingAuditorium && existingShow.SoldTickets != 0)
+            {
+                response.ErrorResponse = new()
+                {
+                    Message = "Auditorium can not be changed when someone bought a ticket",
+                    ErrorCode = 405
+                };
+
+                return response;
+            }
+
+            int result = await _dataContext.SaveChangesAsync();
+
+            if (result > 0)
+            {
+                response.ShowId = existingShow.Id;
+            }
+
+            else
+            {
+                response.ErrorResponse = new()
+                {
+                    Message = "Internal server error",
+                    ErrorCode = 500
+                };
+            }
+
+            return response;
+
+        }
     }
 }

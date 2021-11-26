@@ -9,11 +9,11 @@ export default function DayInCalendar() {
 
     useEffect(function effectFunction() {
         async function fetchShows() {
-            fetchedShows = [];
+            let fetchedShows = [];
 
             const showsService = new ShowsService();
 
-            const fetchedShows = await showsService.getShowsByDate(Number(year), Number(month), Number(day));
+            fetchedShows = await showsService.getShowsByDate(Number(year), Number(month), Number(day));
 
             if(fetchedShows.length > 0) {
                 setShows(fetchedShows);

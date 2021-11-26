@@ -13,12 +13,15 @@
             public const string Create = MoviesBase;
 
             public const string Delete = MoviesBase + "/{id}";
+
             public const string Edit = MoviesBase + "/{id}";
         }
 
         public static class Shows
         {
             private const string ShowsBase = Base + "/shows";
+
+            public const string Edit = ShowsBase + "/{id}";
 
             public const string Create = ShowsBase;
 
