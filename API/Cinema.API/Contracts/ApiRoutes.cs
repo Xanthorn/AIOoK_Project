@@ -20,6 +20,8 @@
         {
             private const string ShowsBase = Base + "/shows";
 
+            public const string Edit = ShowsBase + "/{id}";
+
             public const string Create = ShowsBase;
 
             public const string GetShowByDate = ShowsBase + "/{year}/{month}/{day}";
