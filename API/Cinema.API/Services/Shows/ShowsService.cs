@@ -132,8 +132,12 @@ namespace Cinema.API.Services.Shows
 
             if (existingShow == null)
             {
-                response.Message = "There is no show with given Id";
-                response.ErrorCode = 404;
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no show with given Id",
+                    ErrorCode = 404
+                };
+
                 return response;
             }
 
@@ -141,8 +145,12 @@ namespace Cinema.API.Services.Shows
 
             if (existingMovie == null)
             {
-                response.Message = "There is no movie with given Id";
-                response.ErrorCode = 404;
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no movie with given Id",
+                    ErrorCode = 404
+                };
+
                 return response;
             }
 
@@ -150,8 +158,12 @@ namespace Cinema.API.Services.Shows
 
             if (existingAuditorium == null)
             {
-                response.Message = "There is no auditorium with given Id";
-                response.ErrorCode = 404;
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no auditorium with given Id",
+                    ErrorCode = 404
+                };
+
                 return response;
             }
 
@@ -202,21 +214,29 @@ namespace Cinema.API.Services.Shows
 
             else if (existingShow.Auditorium != existingAuditorium && existingShow.SoldTickets != 0)
             {
-                response.Message = "Auditorium can not be changed when someone bought a ticket";
-                response.ErrorCode = 405;
+                response.ErrorResponse = new()
+                {
+                    Message = "Auditorium can not be changed when someone bought a ticket",
+                    ErrorCode = 405
+                };
+
+                return response;
             }
 
             int result = await _dataContext.SaveChangesAsync();
 
             if (result > 0)
             {
-                response.Message = "Show has been edited succesfully";
+                response.ShowId = existingShow.Id;
             }
 
             else
             {
-                response.Message = "Internal server error";
-                response.ErrorCode = 500;
+                response.ErrorResponse = new()
+                {
+                    Message = "Internal server error",
+                    ErrorCode = 500
+                };
             }
 
             return response;

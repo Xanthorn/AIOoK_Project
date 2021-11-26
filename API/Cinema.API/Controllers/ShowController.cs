@@ -65,14 +65,14 @@ namespace Cinema.API.Controllers
         {
             var result = await _showsService.EditShow(id, request);
 
-            if (result.ErrorCode == -1)
+            if (result.ErrorResponse == null)
             {
-                return Ok(result.Message);
+                return Ok(result.ShowId);
             }
 
             else
             {
-                return StatusCode(result.ErrorCode, result.Message);
+                return StatusCode(result.ErrorResponse.ErrorCode, result.ErrorResponse.Message);
             }
         }
     }
