@@ -180,7 +180,7 @@ namespace Cinema.API.Services.Shows
             {
                 response.Message = "Show has been edited succesfully";
             }
-            else
+            else if(response.Message == null)
             {
                 response.Message = "Internal server error";
                 response.ErrorCode = 500;
