@@ -52,7 +52,7 @@ namespace Cinema.API.Services.Movies
 
             if (existingMovie == null)
             {
-                response.Message = "There is no product with given Id";
+                response.Message = "There is no movie with given Id";
                 response.ErrorCode = 404;
             }
             else
@@ -85,7 +85,7 @@ namespace Cinema.API.Services.Movies
 
             if (existingMovie == null)
             {
-                response.Message = "There is no product with given Id";
+                response.Message = "There is no movie with given Id";
                 response.ErrorCode = 404;
             }
             else

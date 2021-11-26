@@ -19,17 +19,17 @@ namespace Cinema.API.Controllers
             _showsService = new ShowsService(_dataContext);
         }
 
-        [HttpGet(ApiRoutes.Shows.GetShowByDay)]
-        public async Task<IActionResult> GetShowsByDay([FromRoute] int year, [FromRoute] int month, [FromRoute] int day)
+        [HttpGet(ApiRoutes.Shows.GetShowByDate)]
+        public async Task<IActionResult> GetShowsByDate([FromRoute] int year, [FromRoute] int month, [FromRoute] int day)
         {
-            GetShowsByDayRequest request = new()
+            GetShowsByDateRequest request = new()
             {
                 Year = year,
                 Month = month,
                 Day = day
             };
 
-            var result = await _showsService.GetShowsByDay(request);
+            var result = await _showsService.GetShowsByDate(request);
 
             if (result.ErrorCode == -1)
             {
