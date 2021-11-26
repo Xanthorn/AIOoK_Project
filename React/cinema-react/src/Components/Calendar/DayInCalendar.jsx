@@ -15,11 +15,11 @@ export default function DayInCalendar() {
 
             fetchedShows = await showsService.getShowsByDate(Number(year), Number(month), Number(day));
 
-            if(fetchedShows.length > 0) {
+            if (fetchedShows.length > 0) {
                 setShows(fetchedShows);
             }
         }
-        
+
         fetchShows();
 
     }, [year, month, day, setShows]);
@@ -34,21 +34,33 @@ export default function DayInCalendar() {
             <div className="row">
                 {shows.length > 0 ? (
                     <div className="col">
-                        {shows.map((show, key) => {
-                            return (
-                                <Show
-                                    key={key}
-                                    id={show.id}
-                                    date={show.date}
-                                    time={show.time}
-                                    movie={show.movie}
-                                    room={show.room}
-                                    quantitysold={show.quantitysold}
-                                    quantityavailable={show.quantityavailable}
-                                    occupiedseats={show.occupiedseats}
-                                />
-                            )
-                        })}
+                        <table className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th className="text-center">Data</th>
+                                    <th className="text-center">Film</th>
+                                    <th className="text-center">Sala</th>
+                                    <th className="text-center">Sprzedanych</th>
+                                    <th className="text-center">Dostępnych</th>
+                                    <th className="text-center col-1">Zarządzanie</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {shows.map((show, key) => {
+                                    return (
+                                        <Show
+                                            key={key}
+                                            id={show.id}
+                                            date={show.date}
+                                            movie={show.movie}
+                                            auditorium={show.auditorium}
+                                            soldTickets={show.soldTickets}
+                                            availableTickets={show.availableTickets}
+                                        />
+                                    )
+                                })}
+                            </tbody>
+                        </table>
                     </div>
                 ) : (
                     <div className="col">
