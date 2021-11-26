@@ -3,6 +3,8 @@ using Cinema.API.Contracts.Responses.Movies;
 using Cinema.DB;
 using Cinema.DB.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cinema.API.Services.Movies
@@ -94,24 +96,43 @@ namespace Cinema.API.Services.Movies
 
             if (existingMovie == null)
             {
-                response.Message = "There is no movie with given Id";
-                response.ErrorCode = 404;
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no movie with given Id",
+                    ErrorCode = 404
+                };
             }
             else
             {
-                _dataContext.Remove(existingMovie);
+                List<Show> showsUsingMovie = _dataContext.Shows.Where(s => s.Movie == existingMovie).ToList();
+
+                if (showsUsingMovie.Count > 0)
+                {
+                    response.ErrorResponse = new()
+                    {
+                        Message = "This movie is being used by one of the shows",
+                        ErrorCode = 405
+                    };
+
+                    return response;
+                }
+
+                _dataContext.Movies.Remove(existingMovie);
 
                 int result = await _dataContext.SaveChangesAsync();
 
                 if (result > 0)
                 {
-                    response.Message = "Movie has been deleted succesfully";
+                    response.IsDeleted = true;
                 }
 
                 else
                 {
-                    response.Message = "Internal server error";
-                    response.ErrorCode = 500;
+                    response.ErrorResponse = new()
+                    {
+                        Message = "Internal server error",
+                        ErrorCode = 500
+                    };
                 }
             }
             return response;

@@ -1,8 +1,10 @@
-﻿namespace Cinema.API.Contracts.Responses.Movies
+﻿using Cinema.API.Contracts.Responses.Common;
+
+namespace Cinema.API.Contracts.Responses.Movies
 {
     public class DeleteMovieResponse
     {
-        public string Message { get; set; }
-        public int ErrorCode { get; set; } = -1;
+        public bool IsDeleted { get; set; } = false;
+        public ErrorResponse ErrorResponse { get; set; }
     }
 }
