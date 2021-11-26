@@ -73,6 +73,19 @@ namespace Cinema.API.Services.Shows
                 existingShow.Date = DateTime.Parse(request.Date);
                 existingShow.Movie = existingMovie;
                 existingShow.Auditorium = existingAuditorium;
+
+                existingShow.IsSeatTaken = new List<Seat>();
+
+                for (int i = 0; i < existingShow.Auditorium.Capacity; i++)
+                {
+                    Seat seat = new()
+                    {
+                        Id = Guid.NewGuid(),
+                        IsTaken = false,
+                    };
+
+                    existingShow.IsSeatTaken.Add(seat);
+                }
             }
             else if (!existingShow.Auditorium.Equals(existingAuditorium) && existingShow.SoldTickets != 0)
             {
