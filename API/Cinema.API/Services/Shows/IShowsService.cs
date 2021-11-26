@@ -7,7 +7,8 @@ namespace Cinema.API.Services.Shows
 {
     public interface IShowsService
     {
-        Task<GetShowsByDayResponse> GetShowsByDay(GetShowsByDayRequest request);
         Task<EditShowResponse> EditShow(Guid id, EditShowRequest request);
+        Task<CreateShowResponse> CreateShow(CreateShowRequest request);
+        Task<GetShowsByDateResponse> GetShowsByDate(GetShowsByDateRequest request);
     }
 }

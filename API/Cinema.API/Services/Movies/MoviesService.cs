@@ -3,6 +3,8 @@ using Cinema.API.Contracts.Responses.Movies;
 using Cinema.DB;
 using Cinema.DB.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cinema.API.Services.Movies
@@ -16,7 +18,7 @@ namespace Cinema.API.Services.Movies
             _dataContext = dataContext;
         }
 
-        public async Task<CreateMovieResponse> AddMovie(CreateMovieRequest request)
+        public async Task<CreateMovieResponse> CreateMovie(CreateMovieRequest request)
         {
             Movie newMovie = new()
             {
@@ -31,15 +33,18 @@ namespace Cinema.API.Services.Movies
 
             CreateMovieResponse response = new();
 
-            if(result > 0)
+            if (result > 0)
             {
-                response.Message = "Movie added succesfully";
+                response.MovieId = newMovie.Id;
             }
 
             else
             {
-                response.Message = "Internal server error";
-                response.ErrorCode = 500;
+                response.ErrorResponse = new()
+                {
+                    Message = "Internal server error",
+                    ErrorCode = 500
+                };
             }
 
             return response;
@@ -52,8 +57,11 @@ namespace Cinema.API.Services.Movies
 
             if (existingMovie == null)
             {
-                response.Message = "There is no product with given Id";
-                response.ErrorCode = 404;
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no movie with given Id",
+                    ErrorCode = 404
+                };
             }
             else
             {
@@ -65,13 +73,66 @@ namespace Cinema.API.Services.Movies
 
                 if (result > 0)
                 {
-                    response.Message = "Movie has been edited succesfully";
+                    response.MovieId = existingMovie.Id;
                 }
 
                 else
                 {
-                    response.Message = "Internal server error";
-                    response.ErrorCode = 500;
+                    response.ErrorResponse = new()
+                    {
+                        Message = "Internal server error",
+                        ErrorCode = 500
+                    };
+                }
+            }
+            return response;
+        }
+
+        public async Task<DeleteMovieResponse> DeleteMovie(Guid id)
+        {
+            Movie existingMovie = await _dataContext.Movies.FindAsync(id);
+
+            DeleteMovieResponse response = new();
+
+            if (existingMovie == null)
+            {
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no movie with given Id",
+                    ErrorCode = 404
+                };
+            }
+            else
+            {
+                List<Show> showsUsingMovie = _dataContext.Shows.Where(s => s.Movie == existingMovie).ToList();
+
+                if (showsUsingMovie.Count > 0)
+                {
+                    response.ErrorResponse = new()
+                    {
+                        Message = "This movie is being used by one of the shows",
+                        ErrorCode = 405
+                    };
+
+                    return response;
+                }
+
+                _dataContext.Movies.Remove(existingMovie);
+
+                int result = await _dataContext.SaveChangesAsync();
+
+                if (result > 0)
+                {
+                    response.IsDeleted = true;
+                }
+
+                else
+                {
+                    response.ErrorResponse = new()
+                    {
+                        Message = "Internal server error",
+                        ErrorCode = 500
+                    };
                 }
             }
             return response;
