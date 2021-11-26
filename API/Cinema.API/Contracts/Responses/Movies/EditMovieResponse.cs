@@ -3,7 +3,7 @@ using System;
 
 namespace Cinema.API.Contracts.Responses.Movies
 {
-    public class CreateMovieResponse
+    public class EditMovieResponse
     {
         public Guid MovieId { get; set; }
         public ErrorResponse ErrorResponse { get; set; }

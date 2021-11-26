@@ -3,6 +3,7 @@ using Cinema.API.Contracts.Requests.Movies;
 using Cinema.API.Services.Movies;
 using Cinema.DB;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Cinema.API.Controllers
@@ -19,19 +20,51 @@ namespace Cinema.API.Controllers
             _moviesService = new MoviesService(_dataContext);
         }
 
-        [HttpPost(ApiRoutes.Movie.Create)]
-        public async Task<IActionResult> AddMovie([FromBody] CreateMovieRequest request)
+        [HttpPost(ApiRoutes.Movies.Create)]
+        public async Task<IActionResult> CreateMovie([FromBody] CreateMovieRequest request)
         {
-            var result = await _moviesService.AddMovie(request);
+            var result = await _moviesService.CreateMovie(request);
 
-            if (result.ErrorCode == -1)
+            if (result.ErrorResponse == null)
             {
-                return Ok(result.Message);
+                return Ok(result.MovieId);
             }
 
             else
             {
-                return StatusCode(result.ErrorCode, result.Message);
+                return StatusCode(result.ErrorResponse.ErrorCode, result.ErrorResponse.Message);
+            }
+        }
+
+        [HttpPut(ApiRoutes.Movies.Edit)]
+        public async Task<IActionResult> EditMovie([FromRoute] Guid id, [FromBody] EditMovieRequest request)
+        {
+            var result = await _moviesService.EditMovie(id, request);
+
+            if (result.ErrorResponse == null)
+            {
+                return Ok(result.MovieId);
+            }
+
+            else
+            {
+                return StatusCode(result.ErrorResponse.ErrorCode, result.ErrorResponse.Message);
+            }
+        }
+
+        [HttpDelete(ApiRoutes.Movies.Delete)]
+        public async Task<IActionResult> DeleteMovie([FromRoute] Guid id)
+        {
+            var result = await _moviesService.DeleteMovie(id);
+
+            if (result.ErrorResponse == null)
+            {
+                return Ok(result.IsDeleted);
+            }
+
+            else
+            {
+                return StatusCode(result.ErrorResponse.ErrorCode, result.ErrorResponse.Message);
             }
         }
     }
