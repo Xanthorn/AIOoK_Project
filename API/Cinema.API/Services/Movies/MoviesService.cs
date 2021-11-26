@@ -16,7 +16,7 @@ namespace Cinema.API.Services.Movies
             _dataContext = dataContext;
         }
 
-        public async Task<CreateMovieResponse> AddMovie(CreateMovieRequest request)
+        public async Task<CreateMovieResponse> CreateMovie(CreateMovieRequest request)
         {
             Movie newMovie = new()
             {
@@ -31,15 +31,18 @@ namespace Cinema.API.Services.Movies
 
             CreateMovieResponse response = new();
 
-            if(result > 0)
+            if (result > 0)
             {
-                response.Message = "Movie added succesfully";
+                response.MovieId = newMovie.Id;
             }
 
             else
             {
-                response.Message = "Internal server error";
-                response.ErrorCode = 500;
+                response.ErrorResponse = new()
+                {
+                    Message = "Internal server error",
+                    ErrorCode = 500
+                };
             }
 
             return response;

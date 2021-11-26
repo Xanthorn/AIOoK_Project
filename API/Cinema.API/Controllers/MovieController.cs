@@ -21,18 +21,18 @@ namespace Cinema.API.Controllers
         }
 
         [HttpPost(ApiRoutes.Movies.Create)]
-        public async Task<IActionResult> AddMovie([FromBody] CreateMovieRequest request)
+        public async Task<IActionResult> CreateMovie([FromBody] CreateMovieRequest request)
         {
-            var result = await _moviesService.AddMovie(request);
+            var result = await _moviesService.CreateMovie(request);
 
-            if (result.ErrorCode == -1)
+            if (result.ErrorResponse == null)
             {
-                return Ok(result.Message);
+                return Ok(result.MovieId);
             }
 
             else
             {
-                return StatusCode(result.ErrorCode, result.Message);
+                return StatusCode(result.ErrorResponse.ErrorCode, result.ErrorResponse.Message);
             }
         }
 

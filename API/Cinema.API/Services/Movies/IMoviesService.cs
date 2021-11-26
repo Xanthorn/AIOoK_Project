@@ -7,7 +7,7 @@ namespace Cinema.API.Services.Movies
 {
     public interface IMoviesService
     {
-        public Task<CreateMovieResponse> AddMovie(CreateMovieRequest request);
+        public Task<CreateMovieResponse> CreateMovie(CreateMovieRequest request);
         public Task<EditMovieResponse> EditMovie(Guid id, EditMovieRequest request);
         public Task<DeleteMovieResponse> DeleteMovie(Guid id);
     }
