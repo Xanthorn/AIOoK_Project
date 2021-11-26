@@ -70,6 +70,8 @@ namespace Cinema.API.Services.Shows
             }
             else if (!existingShow.Auditorium.Equals(existingAuditorium) && existingShow.SoldTickets == 0)
             {
+                existingShow.Date = DateTime.Parse(request.Date);
+                existingShow.Movie = existingMovie;
                 existingShow.Auditorium = existingAuditorium;
             }
             else if (!existingShow.Auditorium.Equals(existingAuditorium) && existingShow.SoldTickets != 0)
