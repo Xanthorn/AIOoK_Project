@@ -55,8 +55,11 @@ namespace Cinema.API.Services.Movies
 
             if (existingMovie == null)
             {
-                response.Message = "There is no movie with given Id";
-                response.ErrorCode = 404;
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no movie with given Id",
+                    ErrorCode = 404
+                };
             }
             else
             {
@@ -68,13 +71,16 @@ namespace Cinema.API.Services.Movies
 
                 if (result > 0)
                 {
-                    response.Message = "Movie has been edited succesfully";
+                    response.MovieId = existingMovie.Id;
                 }
 
                 else
                 {
-                    response.Message = "Internal server error";
-                    response.ErrorCode = 500;
+                    response.ErrorResponse = new()
+                    {
+                        Message = "Internal server error",
+                        ErrorCode = 500
+                    };
                 }
             }
             return response;
