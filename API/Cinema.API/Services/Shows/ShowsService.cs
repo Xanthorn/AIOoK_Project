@@ -121,7 +121,12 @@ namespace Cinema.API.Services.Shows
 
         public async Task<EditShowResponse> EditShow(Guid id, EditShowRequest request)
         {
-            Show existingShow = await _dataContext.Shows.FindAsync(id);
+            Show existingShow = await _dataContext.Shows
+                .Include(s => s.Movie)
+                .Include(s => s.Auditorium)
+                .Include(s => s.Seats)
+                .Where(s => s.Id == id)
+                .FirstOrDefaultAsync();
 
             Movie existingMovie = await _dataContext.Movies.FindAsync(request.MovieId);
 
