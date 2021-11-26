@@ -9,5 +9,6 @@ namespace Cinema.API.Services.Movies
     {
         public Task<CreateMovieResponse> AddMovie(CreateMovieRequest request);
         public Task<EditMovieResponse> EditMovie(Guid id, EditMovieRequest request);
+        public Task<DeleteMovieResponse> DeleteMovie(Guid id);
     }
 }

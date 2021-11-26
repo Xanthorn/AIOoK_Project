@@ -51,5 +51,21 @@ namespace Cinema.API.Controllers
                 return StatusCode(result.ErrorCode, result.Message);
             }
         }
+
+        [HttpDelete(ApiRoutes.Movie.Delete)]
+        public async Task<IActionResult> DeleteMovie([FromRoute] Guid id)
+        {
+            var result = await _moviesService.DeleteMovie(id);
+
+            if (result.ErrorCode == -1)
+            {
+                return Ok(result.Message);
+            }
+
+            else
+            {
+                return StatusCode(result.ErrorCode, result.Message);
+            }
+        }
     }
 }

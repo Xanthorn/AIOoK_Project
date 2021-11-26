@@ -91,11 +91,11 @@ namespace Cinema.API.Services.Shows
             return response;
         }
 
-        public async Task<GetShowsByDayResponse> GetShowsByDay(GetShowsByDayRequest request)
+        public async Task<GetShowsByDateResponse> GetShowsByDate(GetShowsByDateRequest request)
         {
-            List<Show> shows = await _dataContext.Shows.Where(s => (s.Date.Year == request.Year && s.Date.Month == request.Month && s.Date.Day == request.Day)).ToListAsync();
+            List<Show> shows = await _dataContext.Shows.Include(s => s.Auditorium).Include(s => s.Movie).                           Where(s => (s.Date.Year == request.Year && s.Date.Month == request.Month && s.Date.Day == request.Day)).ToListAsync();
 
-            GetShowsByDayResponse response = new();
+            GetShowsByDateResponse response = new();
 
             if (shows.Count == 0)
             {

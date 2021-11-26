@@ -52,7 +52,7 @@ namespace Cinema.API.Services.Movies
 
             if (existingMovie == null)
             {
-                response.Message = "There is no product with given Id";
+                response.Message = "There is no movie with given Id";
                 response.ErrorCode = 404;
             }
             else
@@ -66,6 +66,37 @@ namespace Cinema.API.Services.Movies
                 if (result > 0)
                 {
                     response.Message = "Movie has been edited succesfully";
+                }
+
+                else
+                {
+                    response.Message = "Internal server error";
+                    response.ErrorCode = 500;
+                }
+            }
+            return response;
+        }
+
+        public async Task<DeleteMovieResponse> DeleteMovie(Guid id)
+        {
+            Movie existingMovie = await _dataContext.Movies.FindAsync(id);
+
+            DeleteMovieResponse response = new();
+
+            if (existingMovie == null)
+            {
+                response.Message = "There is no movie with given Id";
+                response.ErrorCode = 404;
+            }
+            else
+            {
+                _dataContext.Remove(existingMovie);
+
+                int result = await _dataContext.SaveChangesAsync();
+
+                if (result > 0)
+                {
+                    response.Message = "Movie has been deleted succesfully";
                 }
 
                 else
