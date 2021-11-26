@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace Cinema.DB.Models
 {
@@ -12,6 +11,6 @@ namespace Cinema.DB.Models
         public Auditorium Auditorium { get; set; }
         public int SoldTickets { get; set; }
         public int AvailableTickets { get; set; }
-        public ICollection<Seat> IsSeatTaken { get; set; }
+        public ICollection<Seat> Seats { get; set; }
     }
 }
