@@ -15,7 +15,9 @@ export default class ShowsService {
             return response.data;
         }
         catch (e) {
-            console.error(e.response.data);
+            if(e.response !== undefined) {
+                console.error(e.response.data);
+            }
             return [];
         }
     }
