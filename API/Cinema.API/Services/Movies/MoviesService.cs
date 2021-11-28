@@ -153,7 +153,7 @@ namespace Cinema.API.Services.Movies
             }
             else
             {
-                response.movie = existingMovie;
+                response.Movie = existingMovie;
             }
 
             return response;

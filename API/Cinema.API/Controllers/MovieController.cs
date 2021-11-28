@@ -75,7 +75,7 @@ namespace Cinema.API.Controllers
 
             if (result.ErrorResponse == null)
             {
-                return Ok(result.movie);
+                return Ok(result.Movie);
             }
 
             else

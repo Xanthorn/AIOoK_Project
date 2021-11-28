@@ -5,7 +5,7 @@ namespace Cinema.API.Contracts.Responses.Movies
 {
     public class GetMovieByIdResponse
     {
-        public Movie movie { get; set; }
+        public Movie Movie { get; set; }
         public ErrorResponse ErrorResponse { get; set; }
     }
 }
