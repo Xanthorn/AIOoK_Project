@@ -2,6 +2,7 @@
 using Cinema.API.Contracts.Responses.Movies;
 using Cinema.DB;
 using Cinema.DB.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -135,6 +136,50 @@ namespace Cinema.API.Services.Movies
                     };
                 }
             }
+            return response;
+        }
+        public async Task<GetMovieByIdResponse> GetMovieById(Guid id)
+        {
+            Movie existingMovie = await _dataContext.Movies.FindAsync(id);
+
+            GetMovieByIdResponse response = new();
+
+            if (existingMovie == null)
+            {
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no movie with given Id",
+                    ErrorCode = 404
+                };
+            }
+            else
+            {
+                response.Movie = existingMovie;
+            }
+
+            return response;
+        }
+
+        public async Task<GetMoviesResponse> GetMovies()
+        {
+            List<Movie> movies = await _dataContext.Movies.ToListAsync();
+
+            GetMoviesResponse response = new();
+
+            if (movies.Count == 0)
+            {
+                response.ErrorResponse = new()
+                {
+                    Message = "There are no movies",
+                    ErrorCode = 404
+                };
+            }
+
+            else
+            {
+                response.Movies = movies;
+            }
+
             return response;
         }
     }
