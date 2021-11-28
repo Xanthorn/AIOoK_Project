@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from './Components/Home';
 import Movies from './Components/Movies/Movies';
+import AddMovie from './Components/Movies/AddMovie';
 import Shows from './Components/Shows/Shows';
 import Calendar from './Components/Calendar/Calendar';
 import DayInCalendar from './Components/Calendar/DayInCalendar';
@@ -30,9 +31,10 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/movies" element={<Movies />} />
+              <Route path="/movies/add" element={<AddMovie />} />
               <Route path="/shows" element={<Shows />} />
               <Route path="/calendar" element={<Calendar />} />
-              <Route path="/calendar/:year/:month/:day" element={<DayInCalendar />}/>
+              <Route path="/calendar/:year/:month/:day" element={<DayInCalendar />} />
             </Routes>
           </div>
         </div>
