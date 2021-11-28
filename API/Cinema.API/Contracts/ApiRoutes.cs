@@ -27,5 +27,14 @@
 
             public const string GetShowByDate = ShowsBase + "/{year}/{month}/{day}";
         }
+
+        public static class Auditoriums
+        {
+            private const string AuditoriumsBase = Base + "/auditoriums";
+
+            public const string GetAuditoriumById = AuditoriumsBase + "/{id}";
+
+            public const string GetAuditoriums = AuditoriumsBase + "/";
+        }
     }
 }
