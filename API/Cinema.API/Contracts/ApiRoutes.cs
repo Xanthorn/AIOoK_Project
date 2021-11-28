@@ -15,6 +15,8 @@
             public const string Delete = MoviesBase + "/{id}";
 
             public const string Edit = MoviesBase + "/{id}";
+
+            public const string GetMovieById = MoviesBase + "/{id}";
         }
 
         public static class Shows
