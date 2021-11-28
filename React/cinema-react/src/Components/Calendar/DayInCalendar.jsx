@@ -34,12 +34,12 @@ export default function DayInCalendar() {
             <div className="row">
                 {shows.length > 0 ? (
                     <div className="col">
-                        <table className="table table-hover">
+                            <table className="table table-responsive table-hover">
                             <thead>
                                 <tr>
                                     <th className="text-center">Data</th>
                                     <th className="text-center">Film</th>
-                                    <th className="text-center">Sala</th>
+                                    <th className="text-center">Numer Sali</th>
                                     <th className="text-center">Sprzedanych</th>
                                     <th className="text-center">Dostępnych</th>
                                     <th className="text-center col-1">Zarządzanie</th>
