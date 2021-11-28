@@ -16,6 +16,8 @@
 
             public const string Edit = MoviesBase + "/{id}";
 
+            public const string GetMovieById = MoviesBase + "/{id}";
+            
             public const string GetMovies = MoviesBase + "/";
         }
 

@@ -138,6 +138,27 @@ namespace Cinema.API.Services.Movies
             }
             return response;
         }
+        public async Task<GetMovieByIdResponse> GetMovieById(Guid id)
+        {
+            Movie existingMovie = await _dataContext.Movies.FindAsync(id);
+
+            GetMovieByIdResponse response = new();
+
+            if (existingMovie == null)
+            {
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no movie with given Id",
+                    ErrorCode = 404
+                };
+            }
+            else
+            {
+                response.Movie = existingMovie;
+            }
+
+            return response;
+        }
 
         public async Task<GetMoviesResponse> GetMovies()
         {

@@ -10,6 +10,7 @@ namespace Cinema.API.Services.Movies
         public Task<CreateMovieResponse> CreateMovie(CreateMovieRequest request);
         public Task<EditMovieResponse> EditMovie(Guid id, EditMovieRequest request);
         public Task<DeleteMovieResponse> DeleteMovie(Guid id);
+        public Task<GetMovieByIdResponse> GetMovieById(Guid id);
         public Task<GetMoviesResponse> GetMovies();
     }
 }

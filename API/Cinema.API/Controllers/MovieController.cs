@@ -68,6 +68,21 @@ namespace Cinema.API.Controllers
             }
         }
 
+        [HttpGet(ApiRoutes.Movies.GetMovieById)]
+        public async Task<IActionResult> GetMovieById([FromRoute] Guid id)
+        {
+            var result = await _moviesService.GetMovieById(id);
+
+            if (result.ErrorResponse == null)
+            {
+                return Ok(result.Movie);
+            }
+            else
+            {
+                return StatusCode(result.ErrorResponse.ErrorCode, result.ErrorResponse.Message);
+            }
+        }
+        
         [HttpGet(ApiRoutes.Movies.GetMovies)]
         public async Task<IActionResult> GetMovies()
         {
