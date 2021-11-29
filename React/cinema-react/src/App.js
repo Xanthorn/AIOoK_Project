@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from './Components/Home';
 import Movies from './Components/Movies/Movies';
 import AddMovie from './Components/Movies/AddMovie';
+import DeleteMovie from './Components/Movies/DeleteMovie';
 import Shows from './Components/Shows/Shows';
 import AddShow from "./Components/Shows/AddShow"
 import Calendar from './Components/Calendar/Calendar';
@@ -33,6 +34,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/movies" element={<Movies />} />
               <Route path="/movies/add" element={<AddMovie />} />
+              <Route path="/movies/delete/:id" element={<DeleteMovie />} />
               <Route path="/shows" element={<Shows />} />
               <Route path="/shows/add" element={<AddShow />} />
               <Route path="/calendar" element={<Calendar />} />
