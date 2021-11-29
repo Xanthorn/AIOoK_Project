@@ -242,7 +242,32 @@ namespace Cinema.API.Services.Shows
             }
 
             return response;
+        }
 
+        public async Task<GetShowsResponse> GetShows()
+        {
+            List<Show> shows = await _dataContext.Shows
+                                        .Include(s => s.Movie)
+                                        .Include(s => s.Auditorium)
+                                        .ToListAsync();
+
+            GetShowsResponse response = new();
+
+            if (shows.Count > 0)
+            {
+                response.Shows = shows;
+            }
+
+            else
+            {
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no any show in database",
+                    ErrorCode = 404
+                };
+            }
+
+            return response;
         }
     }
 }

@@ -10,5 +10,6 @@ namespace Cinema.API.Services.Shows
         Task<EditShowResponse> EditShow(Guid id, EditShowRequest request);
         Task<CreateShowResponse> CreateShow(CreateShowRequest request);
         Task<GetShowsByDateResponse> GetShowsByDate(GetShowsByDateRequest request);
+        Task<GetShowsResponse> GetShows();
     }
 }
