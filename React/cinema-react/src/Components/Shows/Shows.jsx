@@ -1,22 +1,44 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import Show from "./Show";
+import ShowsService from "../../Services/ShowsService";
+import { Link } from "react-router-dom";
 
-class Shows extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            shows:
-                [
-                    { date: "10-11-2021", time: "10:00", movie: "Diuna", room: 2, quantitysold: 1, quantityavailable: 99, occupiedseats: [5] }
-                ],
+export default function Shows() {
+    const [shows, setShows] = useState([]);
+
+    useEffect(function effectFunction() {
+        async function fetchShows() {
+            let fetchedShows = [];
+
+            const showsService = new ShowsService();
+
+            fetchedShows = await showsService.getShows();
+
+            if (fetchedShows.length > 0) {
+                setShows(fetchedShows);
+            }
         }
-    }
-    render() {
-        return (
-            <div className="container">
-                <div className="row">
-                    <div className="col">
-                        <h1 className="display-4 text-center">Lista seansów</h1>
+
+        fetchShows();
+    }, [setShows]);
+
+    return (
+        <div className="container">
+            <div className="row mb-4">
+                <div className="col">
+                    <h1 className="display-4 text-center">Lista seansów</h1>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col text-end">
+                    <Link className="btn btn-outline-secondary" to="/shows/add">
+                        Dodaj nowy seans
+                    </Link>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col">
+                    {shows.length > 0 ? (
                         <table className="table table-hover">
                             <thead>
                                 <tr>
@@ -32,36 +54,27 @@ class Shows extends Component {
                             </thead>
                             <tbody>
                                 {
-                                    this.state.shows.map((show, key) => {
+                                    shows.map((show, key) => {
                                         return (
                                             <Show
                                                 key={key}
                                                 id={show.id}
                                                 date={show.date}
-                                                time={show.time}
                                                 movie={show.movie}
-                                                room={show.room}
-                                                quantitysold={show.quantitysold}
-                                                quantityavailable={show.quantityavailable}
-                                                occupiedseats={show.occupiedseats}
+                                                auditorium={show.auditorium}
+                                                soldTickets={show.soldTickets}
+                                                availableTickets={show.availableTickets}
                                             />
                                         );
                                     })
                                 }
                             </tbody>
                         </table>
-                    </div>
+                    ) : (
+                        < h2 className="text-center">😭 Brak seansów do wyświetlenia 😭</h2>
+                    )}
                 </div>
-                <div className="row">
-                    <div className="col">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-circle" viewBox="0 0 16 16">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        )
-    }
+            </div >
+        </div >
+    )
 }
-export default Shows;
