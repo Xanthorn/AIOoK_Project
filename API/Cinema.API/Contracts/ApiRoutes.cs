@@ -18,7 +18,7 @@
 
             public const string GetMovieById = MoviesBase + "/{id}";
             
-            public const string GetMovies = MoviesBase + "/";
+            public const string GetMovies = MoviesBase;
         }
 
         public static class Shows
@@ -30,6 +30,8 @@
             public const string Create = ShowsBase;
 
             public const string GetShowByDate = ShowsBase + "/{year}/{month}/{day}";
+
+            public const string GetShows = ShowsBase;
         }
 
         public static class Auditoriums
@@ -38,7 +40,7 @@
 
             public const string GetAuditoriumById = AuditoriumsBase + "/{id}";
 
-            public const string GetAuditoriums = AuditoriumsBase + "/";
+            public const string GetAuditoriums = AuditoriumsBase;
         }
     }
 }
