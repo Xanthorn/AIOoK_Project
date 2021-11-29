@@ -1,9 +1,12 @@
 # Dwie aplikacje webowe (React, Angular) wykonane na zajęcia "Aplikacje internetowe oparte o komponenty" - Prace trwają
-
-## Temat projektu:
+## Treść zadań/Content of the exercises (only in Polish)
+<details>
+  <summary>Rozwiń/Expand</summary>
+  
+### Temat projektu:
 Aplikacja do zarządzania seansami w kinie
 
-## Funkcjonalności (12 pkt):
+### Funkcjonalności (12 pkt):
 <ol>
   <li>
     elementy aplikacji: sale (nr, pojemność/liczba osób), filmy (tytuł, czas trwania), seanse (data, godzina, film, sala, liczba sprzedanych i dostępnych biletów, numery zajętych miejsc)
@@ -30,9 +33,9 @@ Aplikacja do zarządzania seansami w kinie
   </li>
 </ol> 
   
-## Punktacja elementów technicznych (20pkt):
+### Punktacja elementów technicznych (20pkt):
   
-### React: 
+#### React: 
 <ul>
   <li>
     własna walidacja danych wprowadzanych przez użytkownika ( w każdym przypadku wprowadzania danych) - 2 pkt
@@ -75,7 +78,7 @@ Aplikacja do zarządzania seansami w kinie
   </li>
 </ul>
   
-### Angular: 
+#### Angular: 
 <ul>
   <li>
     klasa TypeScript (czy zdefiniowano i zastosowano klasę do organizacji danych, czy pola w klasie są prywatne ) - 1 pkt
@@ -131,3 +134,6 @@ Aplikacja do zarządzania seansami w kinie
     testy routingu (obiektu Router oraz ActivatedRoute i dyrektywy 'routerLink') - 2 pkt
   </li>
 </ul>
+
+</details>
+
