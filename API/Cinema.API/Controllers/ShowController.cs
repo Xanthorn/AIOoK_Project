@@ -75,5 +75,21 @@ namespace Cinema.API.Controllers
                 return StatusCode(result.ErrorResponse.ErrorCode, result.ErrorResponse.Message);
             }
         }
+
+        [HttpGet(ApiRoutes.Shows.GetShows)] 
+        public async Task<IActionResult> GetShows()
+        {
+            GetShowsResponse response = await _showsService.GetShows();
+
+            if (response.ErrorResponse == null)
+            {
+                return Ok(response.Shows);
+            }
+
+            else
+            {
+                return StatusCode(response.ErrorResponse.ErrorCode, response.ErrorResponse.Message);
+            }
+        }
     }
 }
