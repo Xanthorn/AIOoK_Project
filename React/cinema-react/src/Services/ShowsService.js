@@ -9,8 +9,8 @@ export default class ShowsService {
 
             return response.data;
         }
-        catch(e) {
-            if(e.response !== undefined) {
+        catch (e) {
+            if (e.response !== undefined) {
                 console.error(e.response.data);
             }
             return [];
@@ -24,11 +24,26 @@ export default class ShowsService {
             return response.data;
         }
         catch (e) {
-            if(e.response !== undefined) {
+            if (e.response !== undefined) {
                 console.error(e.response.data);
             }
             return [];
         }
     }
 
+    async createShow(date, movieId, auditoriumId) {
+        try {
+            const response = await axios.post(url, {
+                date: date,
+                movieId: movieId,
+                auditoriumId: auditoriumId
+            });
+            console.log(`Movie ID: ${response.data}`);
+        }
+        catch (e) {
+            if (e.response !== undefined) {
+                console.error(e.response.data);
+            }
+        }
+    }
 }
