@@ -43,12 +43,10 @@ export default function Shows() {
                             <thead>
                                 <tr>
                                     <th className="text-center">Data</th>
-                                    <th className="text-center">Godzina</th>
                                     <th className="text-center">Film</th>
                                     <th className="text-center">Sala</th>
                                     <th className="text-center">Sprzedanych</th>
                                     <th className="text-center">Dostępnych</th>
-                                    <th className="text-center">Zajęte</th>
                                     <th className="text-center col-1">Zarządzanie</th>
                                 </tr>
                             </thead>
