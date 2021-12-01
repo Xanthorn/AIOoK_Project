@@ -32,9 +32,10 @@ export default function Calendar() {
         for (let i = 1; i < daysInMonth + firstDayOfMonth; i++) {
             if (i < firstDayOfMonth) {
                 week.push(<td className="col-1 text-center"></td>)
+                continue;
             }
 
-            week.push(<td className="col-1 text-center"><Link to={`/calendar/${actualYear}/${actualMonth}/${i}`}><p className="display-5">{i}</p></Link></td>)
+            week.push(<td className="col-1 text-center"><Link to={`/calendar/${actualYear}/${actualMonth}/${i - firstDayOfMonth + 1}`}><p className="display-5">{i - firstDayOfMonth + 1}</p></Link></td>)
 
             if (i % 7 === 0) {
                 month.push(<tr>{week}</tr>)
