@@ -299,7 +299,7 @@ namespace Cinema.API.Services.Shows
                 {
                     response.ShowId = existingShow.Id;
                 }
-                
+
                 else
                 {
                     response.ErrorResponse = new()
@@ -308,6 +308,33 @@ namespace Cinema.API.Services.Shows
                         ErrorCode = 500
                     };
                 }
+            }
+
+            return response;
+        }
+
+        public async Task<GetShowByIdResponse> GetShowById(Guid id)
+        {
+            Show existingShow = await _dataContext.Shows
+                                    .Include(s => s.Auditorium)
+                                    .Include(s => s.Movie)
+                                    .Where(s => s.Id == id)
+                                    .FirstOrDefaultAsync();
+
+            GetShowByIdResponse response = new();
+
+            if (existingShow == null)
+            {
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no show with given Id",
+                    ErrorCode = 404
+                };
+            }
+
+            else
+            {
+                response.Show = existingShow;
             }
 
             return response;

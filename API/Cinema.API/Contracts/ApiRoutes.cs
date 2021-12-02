@@ -31,6 +31,8 @@
 
             public const string GetByDate = ShowsBase + "/{year}/{month}/{day}";
 
+            public const string GetById = ShowsBase + "/{id}";
+
             public const string GetAll = ShowsBase;
 
             public const string Delete = ShowsBase + "/{id}";
