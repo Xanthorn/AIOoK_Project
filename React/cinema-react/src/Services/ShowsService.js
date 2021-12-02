@@ -38,8 +38,22 @@ export default class ShowsService {
                 movieId: movieId,
                 auditoriumId: auditoriumId
             });
-            console.log(`Movie ID: ${response.data}`);
+            console.log(`ID of added show: ${response.data}`);
         }
+        catch (e) {
+            if (e.response !== undefined) {
+                console.error(e.response.data);
+            }
+        }
+    }
+
+    async deleteShow(id) {
+        try {
+            const response = await axios.delete(`${url}/${id}`);
+
+            console.log(`ID of deleted show: ${response.data}`)
+        }
+
         catch (e) {
             if (e.response !== undefined) {
                 console.error(e.response.data);

@@ -31,4 +31,16 @@ export default class MoviesService {
             return [];
         }
     }
+
+    async deleteMovie(id) {
+        try {
+            const response = await axios.delete(`${url}/${id}`);
+            console.log(`Movie deleted: ${response.data}`);
+        }
+        catch (e) {
+            if (e.response !== undefined) {
+                console.error(e.response.data);
+            }
+        }
+    }
 }
