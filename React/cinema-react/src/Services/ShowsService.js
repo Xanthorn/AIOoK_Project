@@ -17,6 +17,22 @@ export default class ShowsService {
         }
     }
 
+    async getShowById(id) {
+        try {
+            const response = await axios.get(`${url}/${id}`);
+
+            return response.data;
+        }
+
+        catch (e) {
+            if (e.response !== undefined) {
+                console.error(e.response.data);
+            }
+
+            return {};
+        }
+    }
+
     async getShowsByDate(year, month, day) {
         try {
             const response = await axios.get(`${url}/${year}/${month}/${day}`);
