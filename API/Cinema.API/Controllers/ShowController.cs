@@ -108,6 +108,22 @@ namespace Cinema.API.Controllers
             }
         }
 
+        [HttpGet(ApiRoutes.Shows.GetById)]
+        public async Task<IActionResult> GetShowById([FromRoute] Guid id)
+        {
+            GetShowByIdResponse response = await _showsService.GetShowById(id);
+
+            if (response.ErrorResponse == null)
+            {
+                return Ok(response.Show);
+            }
+
+            else
+            {
+                return StatusCode(response.ErrorResponse.ErrorCode, response.ErrorResponse.Message);
+            }
+        }
+
         [HttpGet(ApiRoutes.Shows.GetCurrentShows)]
         public async Task<IActionResult> GetCurrentShows()
         {

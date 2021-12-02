@@ -11,6 +11,7 @@ import DayInCalendar from './Components/Calendar/DayInCalendar';
 import DeleteShow from './Components/Shows/DeleteShow';
 import CurrentShows from './Components/Shows/CurrentShows';
 import EditMovie from './Components/Movies/EditMovie';
+import EditShow from './Components/Shows/EditShow';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
               <Route path="/shows" element={<Shows />} />
               <Route path="/shows/now" element={<CurrentShows />} />
               <Route path="/shows/add" element={<AddShow />} />
+              <Route path="/shows/edit/:id" element={<EditShow />} />
               <Route path="/shows/delete/:id" element={<DeleteShow />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/calendar/:year/:month/:day" element={<DayInCalendar />} />
