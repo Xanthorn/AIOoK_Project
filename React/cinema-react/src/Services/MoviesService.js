@@ -59,4 +59,18 @@ export default class MoviesService {
             }
         }
     }
+
+    async getMovieById(id) {
+        try {
+            const response = await axios.get(`${url}/${id}`);
+
+            return response.data;
+        }
+        catch (e) {
+            if (e.response !== undefined) {
+                console.error(e.response.data);
+            }
+            return [];
+        }
+    }
 }
