@@ -123,5 +123,21 @@ namespace Cinema.API.Controllers
                 return StatusCode(response.ErrorResponse.ErrorCode, response.ErrorResponse.Message);
             }
         }
+
+        [HttpGet(ApiRoutes.Shows.GetCurrentShows)]
+        public async Task<IActionResult> GetCurrentShows()
+        {
+            GetCurrentShowsResponse response = await _showsService.GetCurrentShows();
+
+            if (response.ErrorResponse == null)
+            {
+                return Ok(response.Shows);
+            }
+
+            else
+            {
+                return StatusCode(response.ErrorResponse.ErrorCode, response.ErrorResponse.Message);
+            }
+        }
     }
 }

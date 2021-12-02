@@ -92,4 +92,18 @@ export default class ShowsService {
             }
         }
     }
+
+    async getCurrentShows() {
+        try {
+            const response = await axios.get(url + "/now");
+
+            return response.data;
+        }
+        catch (e) {
+            if (e.response !== undefined) {
+                console.error(e.response.data);
+            }
+            return [];
+        }
+    }
 }

@@ -9,6 +9,8 @@ import AddShow from "./Components/Shows/AddShow"
 import Calendar from './Components/Calendar/Calendar';
 import DayInCalendar from './Components/Calendar/DayInCalendar';
 import DeleteShow from './Components/Shows/DeleteShow';
+import CurrentShows from './Components/Shows/CurrentShows';
+import EditMovie from './Components/Movies/EditMovie';
 import EditShow from './Components/Shows/EditShow';
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
             <div className="navbar-nav">
               <Link className="nav-link" to="/movies">Filmy</Link>
               <Link className="nav-link" to="/shows">Seanse</Link>
+              <Link className="nav-link" to="/shows/now">Trwające seanse</Link>
               <Link className="nav-link" to="/calendar">Kalendarz</Link>
             </div>
           </div>
@@ -37,7 +40,9 @@ function App() {
               <Route path="/movies" element={<Movies />} />
               <Route path="/movies/add" element={<AddMovie />} />
               <Route path="/movies/delete/:id" element={<DeleteMovie />} />
+              <Route path="/movies/edit/:id" element={<EditMovie />} />
               <Route path="/shows" element={<Shows />} />
+              <Route path="/shows/now" element={<CurrentShows />} />
               <Route path="/shows/add" element={<AddShow />} />
               <Route path="/shows/edit/:id" element={<EditShow />} />
               <Route path="/shows/delete/:id" element={<DeleteShow />} />
