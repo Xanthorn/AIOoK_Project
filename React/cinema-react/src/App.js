@@ -10,6 +10,7 @@ import Calendar from './Components/Calendar/Calendar';
 import DayInCalendar from './Components/Calendar/DayInCalendar';
 import DeleteShow from './Components/Shows/DeleteShow';
 import CurrentShows from './Components/Shows/CurrentShows';
+import EditMovie from './Components/Movies/EditMovie';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
               <Route path="/movies" element={<Movies />} />
               <Route path="/movies/add" element={<AddMovie />} />
               <Route path="/movies/delete/:id" element={<DeleteMovie />} />
+              <Route path="/movies/edit/:id" element={<EditMovie />} />
               <Route path="/shows" element={<Shows />} />
               <Route path="/shows/now" element={<CurrentShows />} />
               <Route path="/shows/add" element={<AddShow />} />
