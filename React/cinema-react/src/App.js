@@ -8,6 +8,7 @@ import Shows from './Components/Shows/Shows';
 import AddShow from "./Components/Shows/AddShow"
 import Calendar from './Components/Calendar/Calendar';
 import DayInCalendar from './Components/Calendar/DayInCalendar';
+import DeleteShow from './Components/Shows/DeleteShow';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
               <Route path="/movies/delete/:id" element={<DeleteMovie />} />
               <Route path="/shows" element={<Shows />} />
               <Route path="/shows/add" element={<AddShow />} />
+              <Route path="/shows/delete/:id" element={<DeleteShow />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/calendar/:year/:month/:day" element={<DayInCalendar />} />
             </Routes>
