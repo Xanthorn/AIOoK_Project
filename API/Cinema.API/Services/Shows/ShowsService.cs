@@ -320,7 +320,7 @@ namespace Cinema.API.Services.Shows
                                        .Include(s => s.Auditorium)
                                        .Include(s => s.Seats)
                                        .Where(s => s.Date.Date == DateTime.Today)
-                                       .Where(s => s.Date.AddHours((s.Movie.DurationHours + (s.Movie.DurationMinutes)/60)) >= DateTime.Now)
+                                       .Where(s => s.Date.AddHours((Convert.ToDouble(s.Movie.DurationHours) + Convert.ToDouble(s.Movie.DurationMinutes)/60)) >= DateTime.Now)
                                        .Where(s => s.Date <= DateTime.Now)
                                        .ToListAsync();
 
