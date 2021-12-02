@@ -12,5 +12,6 @@ namespace Cinema.API.Services.Shows
         Task<GetShowsByDateResponse> GetShowsByDate(GetShowsByDateRequest request);
         Task<GetShowsResponse> GetShows();
         Task<DeleteShowResponse> DeleteShow(Guid id);
+        Task<GetCurrentShowsResponse> GetCurrentShows();
     }
 }

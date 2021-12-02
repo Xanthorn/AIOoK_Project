@@ -312,5 +312,35 @@ namespace Cinema.API.Services.Shows
 
             return response;
         }
+
+        public async Task<GetCurrentShowsResponse> GetCurrentShows()
+        {
+            List<Show> shows = await _dataContext.Shows
+                                       .Include(s => s.Movie)
+                                       .Include(s => s.Auditorium)
+                                       .Include(s => s.Seats)
+                                       .Where(s => s.Date.Date == DateTime.Today)
+                                       .Where(s => s.Date.AddHours((Convert.ToDouble(s.Movie.DurationHours) + Convert.ToDouble(s.Movie.DurationMinutes)/60)) >= DateTime.Now)
+                                       .Where(s => s.Date <= DateTime.Now)
+                                       .ToListAsync();
+
+            GetCurrentShowsResponse response = new();
+
+            if (shows.Count > 0)
+            {
+                response.Shows = shows;
+            }
+
+            else
+            {
+                response.ErrorResponse = new()
+                {
+                    Message = "No movie is playing now.",
+                    ErrorCode = 404
+                };
+            }
+
+            return response;
+        }
     }
 }
