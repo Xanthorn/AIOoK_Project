@@ -37,6 +37,7 @@ function App() {
               <Route path="/movies/add" element={<AddMovie />} />
               <Route path="/movies/delete/:id" element={<DeleteMovie />} />
               <Route path="/shows" element={<Shows />} />
+              <Route path="/shows/now" element={<CurrentShows />} />
               <Route path="/shows/add" element={<AddShow />} />
               <Route path="/shows/delete/:id" element={<DeleteShow />} />
               <Route path="/calendar" element={<Calendar />} />
