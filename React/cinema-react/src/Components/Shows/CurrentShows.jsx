@@ -39,6 +39,7 @@ export default function CurrentShows() {
                                     <th className="text-center">Sala</th>
                                     <th className="text-center">Sprzedanych</th>
                                     <th className="text-center">Dostępnych</th>
+                                    <th className="text-center col-1">Zarządzanie</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -60,7 +61,7 @@ export default function CurrentShows() {
                             </tbody>
                         </table>
                     ) : (
-                        < h2 className="text-center">😭 Brak aktualnie trwających seansów do wyświetlenia 😭</h2>
+                        < h2 className="text-center">😭 Brak aktualnie trwających seansów 😭</h2>
                     )}
                 </div>
             </div >

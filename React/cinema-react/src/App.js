@@ -24,6 +24,7 @@ function App() {
             <div className="navbar-nav">
               <Link className="nav-link" to="/movies">Filmy</Link>
               <Link className="nav-link" to="/shows">Seanse</Link>
+              <Link className="nav-link" to="/shows/now">Trwające seanse</Link>
               <Link className="nav-link" to="/calendar">Kalendarz</Link>
             </div>
           </div>
