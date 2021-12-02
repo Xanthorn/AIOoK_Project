@@ -263,5 +263,44 @@ namespace Cinema.API.Services.Shows
 
             return response;
         }
+
+        public async Task<DeleteShowResponse> DeleteShow(Guid id)
+        {
+            Show existingShow = await _dataContext.Shows.FindAsync(id);
+
+            DeleteShowResponse response = new();
+
+            if (existingShow == null)
+            {
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no show with given Id",
+                    ErrorCode = 404
+                };
+            }
+
+            else
+            {
+                _dataContext.Shows.Remove(existingShow);
+
+                int result = await _dataContext.SaveChangesAsync();
+
+                if (result > 0)
+                {
+                    response.ShowId = existingShow.Id;
+                }
+                
+                else
+                {
+                    response.ErrorResponse = new()
+                    {
+                        Message = "Internal server error",
+                        ErrorCode = 500
+                    };
+                }
+            }
+
+            return response;
+        }
     }
 }
