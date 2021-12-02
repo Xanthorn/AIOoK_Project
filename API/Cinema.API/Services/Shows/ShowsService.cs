@@ -169,13 +169,7 @@ namespace Cinema.API.Services.Shows
                 return response;
             }
 
-            if (existingShow.Auditorium == existingAuditorium)
-            {
-                existingShow.Date = DateTime.Parse(request.Date);
-                existingShow.Movie = existingMovie;
-            }
-
-            else if (existingShow.Auditorium != existingAuditorium && existingShow.SoldTickets == 0)
+            if (existingShow.SoldTickets == 0)
             {
                 existingShow.Date = DateTime.Parse(request.Date);
                 existingShow.Movie = existingMovie;
@@ -195,7 +189,7 @@ namespace Cinema.API.Services.Shows
                     existingShow.AvailableTickets -= seatsToDelete;
                 }
 
-                else
+                else if (existingShow.Seats.Count < existingAuditorium.Capacity)
                 {
                     int seatsToCreate = existingAuditorium.Capacity - existingShow.Seats.Count;
 
@@ -214,11 +208,11 @@ namespace Cinema.API.Services.Shows
                 }
             }
 
-            else if (existingShow.Auditorium != existingAuditorium && existingShow.SoldTickets != 0)
+            else
             {
                 response.ErrorResponse = new()
                 {
-                    Message = "Auditorium can not be changed when someone bought a ticket",
+                    Message = "Show can not be changed when someone bought a ticket",
                     ErrorCode = 405
                 };
 
