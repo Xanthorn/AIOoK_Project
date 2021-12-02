@@ -266,7 +266,10 @@ namespace Cinema.API.Services.Shows
 
         public async Task<DeleteShowResponse> DeleteShow(Guid id)
         {
-            Show existingShow = await _dataContext.Shows.FindAsync(id);
+            Show existingShow = await _dataContext.Shows
+                                        .Include(s => s.Seats)
+                                        .Where(s => s.Id == id)
+                                        .FirstOrDefaultAsync();
 
             DeleteShowResponse response = new();
 
@@ -281,6 +284,13 @@ namespace Cinema.API.Services.Shows
 
             else
             {
+                for (int i = 0; i < existingShow.AvailableTickets; i++)
+                {
+                    Seat seatToDelete = existingShow.Seats.FirstOrDefault();
+                    existingShow.Seats.Remove(seatToDelete);
+                    _dataContext.Seats.Remove(seatToDelete);
+                }
+
                 _dataContext.Shows.Remove(existingShow);
 
                 int result = await _dataContext.SaveChangesAsync();
