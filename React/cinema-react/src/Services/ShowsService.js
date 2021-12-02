@@ -76,4 +76,20 @@ export default class ShowsService {
             }
         }
     }
+
+    async editShow(id, date, movieId, auditoriumId) {
+        try {
+            const response = await axios.patch(`${url}/${id}`, {
+                date: date,
+                movieId: movieId,
+                auditoriumId: auditoriumId
+            });
+            console.log(`ID of edited show: ${response.data}`);
+        }
+        catch (e) {
+            if (e.response !== undefined) {
+                console.error(e.response.data);
+            }
+        }
+    }
 }
