@@ -9,6 +9,7 @@ import AddShow from "./Components/Shows/AddShow"
 import Calendar from './Components/Calendar/Calendar';
 import DayInCalendar from './Components/Calendar/DayInCalendar';
 import DeleteShow from './Components/Shows/DeleteShow';
+import CurrentShows from './Components/Shows/CurrentShows';
 
 function App() {
   return (
