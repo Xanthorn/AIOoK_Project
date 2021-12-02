@@ -29,9 +29,11 @@
 
             public const string Create = ShowsBase;
 
-            public const string GetShowByDate = ShowsBase + "/{year}/{month}/{day}";
+            public const string GetByDate = ShowsBase + "/{year}/{month}/{day}";
 
-            public const string GetShows = ShowsBase;
+            public const string GetAll = ShowsBase;
+
+            public const string Delete = ShowsBase + "/{id}";
         }
 
         public static class Auditoriums

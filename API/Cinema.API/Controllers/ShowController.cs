@@ -37,7 +37,7 @@ namespace Cinema.API.Controllers
             }
         }
 
-        [HttpGet(ApiRoutes.Shows.GetShowByDate)]
+        [HttpGet(ApiRoutes.Shows.GetByDate)]
         public async Task<IActionResult> GetShowsByDate([FromRoute] int year, [FromRoute] int month, [FromRoute] int day)
         {
             GetShowsByDateRequest request = new()
@@ -76,7 +76,7 @@ namespace Cinema.API.Controllers
             }
         }
 
-        [HttpGet(ApiRoutes.Shows.GetShows)] 
+        [HttpGet(ApiRoutes.Shows.GetAll)]
         public async Task<IActionResult> GetShows()
         {
             GetShowsResponse response = await _showsService.GetShows();
@@ -84,6 +84,22 @@ namespace Cinema.API.Controllers
             if (response.ErrorResponse == null)
             {
                 return Ok(response.Shows);
+            }
+
+            else
+            {
+                return StatusCode(response.ErrorResponse.ErrorCode, response.ErrorResponse.Message);
+            }
+        }
+
+        [HttpDelete(ApiRoutes.Shows.Delete)]
+        public async Task<IActionResult> DeleteShow([FromRoute] Guid id)
+        {
+            DeleteShowResponse response = await _showsService.DeleteShow(id);
+
+            if (response.ErrorResponse == null)
+            {
+                return Ok(response.ShowId);
             }
 
             else

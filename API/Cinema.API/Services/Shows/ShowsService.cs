@@ -169,13 +169,7 @@ namespace Cinema.API.Services.Shows
                 return response;
             }
 
-            if (existingShow.Auditorium == existingAuditorium)
-            {
-                existingShow.Date = DateTime.Parse(request.Date);
-                existingShow.Movie = existingMovie;
-            }
-
-            else if (existingShow.Auditorium != existingAuditorium && existingShow.SoldTickets == 0)
+            if (existingShow.SoldTickets == 0)
             {
                 existingShow.Date = DateTime.Parse(request.Date);
                 existingShow.Movie = existingMovie;
@@ -195,7 +189,7 @@ namespace Cinema.API.Services.Shows
                     existingShow.AvailableTickets -= seatsToDelete;
                 }
 
-                else
+                else if (existingShow.Seats.Count < existingAuditorium.Capacity)
                 {
                     int seatsToCreate = existingAuditorium.Capacity - existingShow.Seats.Count;
 
@@ -214,11 +208,11 @@ namespace Cinema.API.Services.Shows
                 }
             }
 
-            else if (existingShow.Auditorium != existingAuditorium && existingShow.SoldTickets != 0)
+            else
             {
                 response.ErrorResponse = new()
                 {
-                    Message = "Auditorium can not be changed when someone bought a ticket",
+                    Message = "Show can not be changed when someone bought a ticket",
                     ErrorCode = 405
                 };
 
@@ -265,6 +259,55 @@ namespace Cinema.API.Services.Shows
                     Message = "There is no any show in database",
                     ErrorCode = 404
                 };
+            }
+
+            return response;
+        }
+
+        public async Task<DeleteShowResponse> DeleteShow(Guid id)
+        {
+            Show existingShow = await _dataContext.Shows
+                                        .Include(s => s.Seats)
+                                        .Where(s => s.Id == id)
+                                        .FirstOrDefaultAsync();
+
+            DeleteShowResponse response = new();
+
+            if (existingShow == null)
+            {
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no show with given Id",
+                    ErrorCode = 404
+                };
+            }
+
+            else
+            {
+                for (int i = 0; i < existingShow.AvailableTickets; i++)
+                {
+                    Seat seatToDelete = existingShow.Seats.FirstOrDefault();
+                    existingShow.Seats.Remove(seatToDelete);
+                    _dataContext.Seats.Remove(seatToDelete);
+                }
+
+                _dataContext.Shows.Remove(existingShow);
+
+                int result = await _dataContext.SaveChangesAsync();
+
+                if (result > 0)
+                {
+                    response.ShowId = existingShow.Id;
+                }
+                
+                else
+                {
+                    response.ErrorResponse = new()
+                    {
+                        Message = "Internal server error",
+                        ErrorCode = 500
+                    };
+                }
             }
 
             return response;
