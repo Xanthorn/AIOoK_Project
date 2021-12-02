@@ -43,4 +43,20 @@ export default class MoviesService {
             }
         }
     }
+
+    async editMovie(id, title, hours, minutes) {
+        try {
+            const response = await axios.put(`${url}/${id}`, {
+                title: title,
+                durationHours: Number(hours),
+                durationMinutes: Number(minutes),
+            });
+            console.log(`Movie edited: ${response.data}`);
+        }
+        catch (e) {
+            if (e.response !== undefined) {
+                console.error(e.response.data);
+            }
+        }
+    }
 }
