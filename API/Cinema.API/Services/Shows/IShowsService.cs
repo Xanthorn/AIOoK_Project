@@ -14,6 +14,6 @@ namespace Cinema.API.Services.Shows
         Task<DeleteShowResponse> DeleteShow(Guid id);
         Task<GetShowByIdResponse> GetShowById(Guid id);
         Task<GetCurrentShowsResponse> GetCurrentShows();
-        Task<BuyTicketsResponse> BuyTicket(BuyTicketsRequest request);
+        Task<BuyTicketsResponse> BuyTicket(Guid id, BuyTicketsRequest request);
     }
 }

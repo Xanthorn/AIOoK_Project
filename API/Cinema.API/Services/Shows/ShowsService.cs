@@ -370,12 +370,13 @@ namespace Cinema.API.Services.Shows
             return response;
         }
 
-        public async Task<BuyTicketsResponse> BuyTicket(BuyTicketsRequest request)
+        public async Task<BuyTicketsResponse> BuyTicket(Guid id, BuyTicketsRequest request)
         {
             Show existingShow = await _dataContext.Shows
                                    .Include(s => s.Auditorium)
                                    .Include(s => s.Movie)
                                    .Include(s => s.Seats)
+                                   .Where(s => s.Id == id)
                                    .FirstOrDefaultAsync();
             
             BuyTicketsResponse response = new();
@@ -403,6 +404,8 @@ namespace Cinema.API.Services.Shows
                             Message = "There is no seat with given Id",
                             ErrorCode = 404
                         };
+
+                        return response;
                     }
                     if (!existingShow.Seats.Contains(existingSeat))
                     {
@@ -411,6 +414,8 @@ namespace Cinema.API.Services.Shows
                             Message = "This seat is not in this show",
                             ErrorCode = 404
                         };
+
+                        return response;
                     }
                     else if (existingSeat.IsTaken == true)
                     {
@@ -419,6 +424,8 @@ namespace Cinema.API.Services.Shows
                             Message = "The choosen seat is already taken",
                             ErrorCode = 404
                         };
+
+                        return response;
                     }
                     else
                     {

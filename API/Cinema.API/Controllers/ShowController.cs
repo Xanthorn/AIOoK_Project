@@ -141,9 +141,9 @@ namespace Cinema.API.Controllers
         }
 
         [HttpPatch(ApiRoutes.Shows.BuyTickets)]
-        public async Task<IActionResult> BuyTickets([FromBody] BuyTicketsRequest request)
+        public async Task<IActionResult> BuyTickets([FromRoute] Guid id ,[FromBody] BuyTicketsRequest request)
         {
-            var result = await _showsService.BuyTicket(request);
+            var result = await _showsService.BuyTicket(id, request);
 
             if (result.ErrorResponse == null)
             {
