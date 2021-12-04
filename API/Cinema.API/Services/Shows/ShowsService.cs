@@ -369,5 +369,85 @@ namespace Cinema.API.Services.Shows
 
             return response;
         }
+
+        public async Task<BuyTicketsResponse> BuyTicket(BuyTicketsRequest request)
+        {
+            Show existingShow = await _dataContext.Shows
+                                   .Include(s => s.Auditorium)
+                                   .Include(s => s.Movie)
+                                   .Include(s => s.Seats)
+                                   .FirstOrDefaultAsync();
+            
+            BuyTicketsResponse response = new();
+
+            if (existingShow == null)
+            {
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no show with given Id",
+                    ErrorCode = 404
+                };
+            }
+            else
+            {
+                int correctSeats = 0;
+
+                for (int i = 0; i < request.SeatsId.Count; i++)
+                {
+                    Seat existingSeat = await _dataContext.Seats.FindAsync(request.SeatsId[i]);
+
+                    if(existingSeat == null)
+                    {
+                        response.ErrorResponse = new()
+                        {
+                            Message = "There is no seat with given Id",
+                            ErrorCode = 404
+                        };
+                    }
+                    if (!existingShow.Seats.Contains(existingSeat))
+                    {
+                        response.ErrorResponse = new()
+                        {
+                            Message = "This seat is not in this show",
+                            ErrorCode = 404
+                        };
+                    }
+                    else if (existingSeat.IsTaken == true)
+                    {
+                        response.ErrorResponse = new()
+                        {
+                            Message = "The choosen seat is already taken",
+                            ErrorCode = 404
+                        };
+                    }
+                    else
+                    {
+                        existingSeat.IsTaken = true;
+                        existingShow.AvailableTickets--;
+                        existingShow.SoldTickets++;
+                        correctSeats++;
+                    }
+                }
+                if (correctSeats == request.SeatsId.Count)
+                {
+                    int result = await _dataContext.SaveChangesAsync();
+
+                    if (result > 0)
+                    {
+                        response.SeatsId = request.SeatsId;
+                    }
+
+                    else
+                    {
+                        response.ErrorResponse = new()
+                        {
+                            Message = "Internal server error",
+                            ErrorCode = 500
+                        };
+                    }
+                }
+            }
+            return response;
+        }
     }
 }
