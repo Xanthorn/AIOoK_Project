@@ -139,5 +139,21 @@ namespace Cinema.API.Controllers
                 return StatusCode(response.ErrorResponse.ErrorCode, response.ErrorResponse.Message);
             }
         }
+
+        [HttpPatch(ApiRoutes.Shows.BuyTickets)]
+        public async Task<IActionResult> BuyTickets([FromRoute] Guid id ,[FromBody] BuyTicketsRequest request)
+        {
+            var result = await _showsService.BuyTicket(id, request);
+
+            if (result.ErrorResponse == null)
+            {
+                return Ok(result.SeatsId);
+            }
+
+            else
+            {
+                return StatusCode(result.ErrorResponse.ErrorCode, result.ErrorResponse.Message);
+            }
+        }
     }
 }
