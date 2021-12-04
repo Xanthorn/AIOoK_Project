@@ -391,8 +391,6 @@ namespace Cinema.API.Services.Shows
             }
             else
             {
-                int correctSeats = 0;
-
                 for (int i = 0; i < request.SeatsId.Count; i++)
                 {
                     Seat existingSeat = await _dataContext.Seats.FindAsync(request.SeatsId[i]);
@@ -432,26 +430,22 @@ namespace Cinema.API.Services.Shows
                         existingSeat.IsTaken = true;
                         existingShow.AvailableTickets--;
                         existingShow.SoldTickets++;
-                        correctSeats++;
                     }
                 }
-                if (correctSeats == request.SeatsId.Count)
+                int result = await _dataContext.SaveChangesAsync();
+
+                if (result > 0)
                 {
-                    int result = await _dataContext.SaveChangesAsync();
+                    response.SeatsId = request.SeatsId;
+                }
 
-                    if (result > 0)
+                else
+                {
+                    response.ErrorResponse = new()
                     {
-                        response.SeatsId = request.SeatsId;
-                    }
-
-                    else
-                    {
-                        response.ErrorResponse = new()
-                        {
-                            Message = "Internal server error",
-                            ErrorCode = 500
-                        };
-                    }
+                        Message = "Internal server error",
+                        ErrorCode = 500
+                    };
                 }
             }
             return response;
