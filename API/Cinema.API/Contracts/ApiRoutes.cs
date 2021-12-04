@@ -38,6 +38,8 @@
             public const string Delete = ShowsBase + "/{id}";
 
             public const string GetCurrentShows = ShowsBase + "/now";
+
+            public const string BuyTickets = ShowsBase + "/buy";
         }
 
         public static class Auditoriums
