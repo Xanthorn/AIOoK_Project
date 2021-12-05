@@ -197,7 +197,8 @@ namespace Cinema.API.Services.Movies
             {
                 response.ErrorResponse = new()
                 {
-                    Message = "There is no any show of the particular movie"
+                    Message = "There is no any show of the particular movie at the given date",
+                    ErrorCode = 404
                 };
 
                 return response;
