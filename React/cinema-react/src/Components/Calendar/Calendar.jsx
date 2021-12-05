@@ -31,14 +31,14 @@ export default function Calendar() {
         let week = [];
         for (let i = 1; i < daysInMonth + firstDayOfMonth; i++) {
             if (i < firstDayOfMonth) {
-                week.push(<td className="col-1 text-center"></td>)
+                week.push(<td key={i} className="col-1 text-center"></td>)
                 continue;
             }
 
-            week.push(<td className="col-1 text-center"><Link to={`/calendar/${actualYear}/${actualMonth}/${i - firstDayOfMonth + 1}`}><p className="display-5">{i - firstDayOfMonth + 1}</p></Link></td>)
+            week.push(<td key={i} className="col-1 text-center"><Link to={`/calendar/${actualYear}/${actualMonth}/${i - firstDayOfMonth + 1}`}><p className="display-5">{i - firstDayOfMonth + 1}</p></Link></td>)
 
             if (i % 7 === 0) {
-                month.push(<tr>{week}</tr>)
+                month.push(<tr key={i / 7}>{week}</tr>)
                 week = [];
             }
         }
@@ -46,11 +46,11 @@ export default function Calendar() {
         if (week.length < 7) {
             const missingDays = 7 - week.length;
             for (let i = 0; i < missingDays; i++) {
-                week.push(<td className="col-1 text-center"></td>)
+                week.push(<td key={i} className="col-1 text-center"></td>)
             }
         }
 
-        month.push(<tr>{week}</tr>)
+        month.push(<tr key={month.length + 1}>{week}</tr>)
 
         return month;
     }
