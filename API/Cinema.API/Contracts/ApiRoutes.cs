@@ -2,9 +2,9 @@
 {
     public class ApiRoutes
     {
-        public const string Version = "v1";
-        public const string Root = "api";
-        public const string Base = Root + "/" + Version;
+        private const string Version = "v1";
+        private const string Root = "api";
+        private const string Base = Root + "/" + Version;
 
         public static class Movies
         {
@@ -19,6 +19,8 @@
             public const string GetMovieById = MoviesBase + "/{id}";
             
             public const string GetMovies = MoviesBase;
+
+            public const string GetPopularityOfMovieByDate = MoviesBase + "/{id}/{year}/{month}/{day}";
         }
 
         public static class Shows
