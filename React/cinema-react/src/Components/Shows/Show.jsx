@@ -1,6 +1,7 @@
 import "./Show.css"
 import { Link } from "react-router-dom";
 import Parser from "../../Common/Parser";
+import PropTypes from 'prop-types'
 
 function Show(props) {
     const parser = new Parser();
@@ -36,5 +37,20 @@ function Show(props) {
         </tr>
     )
 }
-
+Show.propTypes = {
+    date: PropTypes.string,
+    movie: PropTypes.shape({
+        title: PropTypes.string,
+        durationHours: PropTypes.number,
+        durationMinutes: PropTypes.number,
+    }),
+    auditorium: PropTypes.shape({
+        number: PropTypes.number,
+        rows: PropTypes.number,
+        seatsInRow: PropTypes.number,
+        capacity: PropTypes.number
+    }),
+    soldTickets: PropTypes.number,
+    availableTickets: PropTypes.number
+}
 export default Show;

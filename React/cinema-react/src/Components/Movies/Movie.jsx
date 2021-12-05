@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types'
 
 function Movie(props) {
     return (
@@ -20,6 +21,11 @@ function Movie(props) {
             </td>
         </tr>
     )
+}
+Movie.propTypes = {
+    title: PropTypes.string,
+    durationHours: PropTypes.number,
+    durationMinutes: PropTypes.number,
 }
 
 export default Movie;
