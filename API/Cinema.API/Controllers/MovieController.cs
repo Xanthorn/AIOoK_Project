@@ -82,7 +82,7 @@ namespace Cinema.API.Controllers
                 return StatusCode(result.ErrorResponse.ErrorCode, result.ErrorResponse.Message);
             }
         }
-        
+
         [HttpGet(ApiRoutes.Movies.GetMovies)]
         public async Task<IActionResult> GetMovies()
         {
@@ -91,6 +91,28 @@ namespace Cinema.API.Controllers
             if (result.ErrorResponse == null)
             {
                 return Ok(result.Movies);
+            }
+
+            else
+            {
+                return StatusCode(result.ErrorResponse.ErrorCode, result.ErrorResponse.Message);
+            }
+        }
+
+        [HttpGet(ApiRoutes.Movies.GetPopularityOfMovieByDate)]
+        public async Task<IActionResult> GetPopularityOfMovieByDate([FromRoute] Guid id, [FromRoute] int year, [FromRoute] int month, [FromRoute] int day)
+        {
+            GetPopularityOfMovieByDateRequest request = new()
+            {
+                Id = id,
+                Date = new DateTime(year, month, day)
+            };
+
+            var result = await _moviesService.GetPopularityOfMovieByDate(request);
+
+            if (result.ErrorResponse == null)
+            {
+                return Ok(result);
             }
 
             else

@@ -182,5 +182,37 @@ namespace Cinema.API.Services.Movies
 
             return response;
         }
+
+        public async Task<GetPopularityOfMovieByDateResponse> GetPopularityOfMovieByDate(GetPopularityOfMovieByDateRequest request)
+        {
+            List<Show> shows = await _dataContext.Shows
+                                        .Where(s => s.Movie.Id == request.Id)
+                                        .Where(s => s.Date > request.Date)
+                                        .Where(s => s.Date < request.Date.AddDays(1))
+                                        .ToListAsync();
+
+            GetPopularityOfMovieByDateResponse response = new();
+
+            if(shows.Count == 0)
+            {
+                response.ErrorResponse = new()
+                {
+                    Message = "There is no any show of the particular movie at the given date",
+                    ErrorCode = 404
+                };
+
+                return response;
+            }
+
+            response.NumberOfShows = shows.Count;
+            for (int i = 0; i < shows.Count; i++)
+            {
+                response.AvailableTickets += shows[i].AvailableTickets;
+                response.SoldTickets += shows[i].SoldTickets;
+                response.SumOfTickets += (shows[i].AvailableTickets + shows[i].SoldTickets);
+            }
+
+            return response;
+        }
     }
 }

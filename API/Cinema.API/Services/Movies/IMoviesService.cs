@@ -12,5 +12,6 @@ namespace Cinema.API.Services.Movies
         public Task<DeleteMovieResponse> DeleteMovie(Guid id);
         public Task<GetMovieByIdResponse> GetMovieById(Guid id);
         public Task<GetMoviesResponse> GetMovies();
+        public Task<GetPopularityOfMovieByDateResponse> GetPopularityOfMovieByDate(GetPopularityOfMovieByDateRequest request);
     }
 }
