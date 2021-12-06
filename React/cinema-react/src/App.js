@@ -13,6 +13,7 @@ import CurrentShows from './Components/Shows/CurrentShows';
 import EditMovie from './Components/Movies/EditMovie';
 import EditShow from './Components/Shows/EditShow';
 import MoviePopularity from './Components/Movies/MoviePopularity';
+import BuyTicket from './Components/Shows/BuyTicket';
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
               <Route path="/shows/add" element={<AddShow />} />
               <Route path="/shows/edit/:id" element={<EditShow />} />
               <Route path="/shows/delete/:id" element={<DeleteShow />} />
+              <Route path="/shows/buy-ticket/:id" element={<BuyTicket />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/calendar/:year/:month/:day" element={<DayInCalendar />} />
             </Routes>

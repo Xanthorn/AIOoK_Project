@@ -91,26 +91,26 @@ export default function MoviePopularity() {
                         <div className="container">
                             <div className="row">
                                 <div className="col">
-                                <table className="table table-responsive table-hover">
-                            <thead>
-                                <tr>
-                                    <th className="text-center">Liczba seansów</th>
-                                    <th className="text-center">Liczba sprzedanych biletów</th>
-                                    <th className="text-center">Liczba dostępnych biletów</th>
-                                    <th className="text-center">Łączna liczba biletów</th>
-                                    <th className="text-center">Procent zajętych miejsc</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{popularityData[0]}</td>
-                                    <td>{popularityData[1]}</td>
-                                    <td>{popularityData[2]}</td>
-                                    <td>{popularityData[1] + popularityData[2]}</td>
-                                    <td>{popularityData[1] / (popularityData[1] + popularityData[2]) * 100}%</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    <table className="table table-responsive table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th className="text-center">Liczba seansów</th>
+                                                <th className="text-center">Liczba sprzedanych biletów</th>
+                                                <th className="text-center">Liczba dostępnych biletów</th>
+                                                <th className="text-center">Łączna liczba biletów</th>
+                                                <th className="text-center">Procent zajętych miejsc</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{popularityData[0]}</td>
+                                                <td>{popularityData[1]}</td>
+                                                <td>{popularityData[2]}</td>
+                                                <td>{popularityData[1] + popularityData[2]}</td>
+                                                <td>{popularityData[1] / (popularityData[1] + popularityData[2]) * 100}%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
