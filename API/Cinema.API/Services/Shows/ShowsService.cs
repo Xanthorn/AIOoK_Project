@@ -318,6 +318,7 @@ namespace Cinema.API.Services.Shows
             Show existingShow = await _dataContext.Shows
                                     .Include(s => s.Auditorium)
                                     .Include(s => s.Movie)
+                                    .Include(s => s.Seats)
                                     .Where(s => s.Id == id)
                                     .FirstOrDefaultAsync();
 

@@ -106,4 +106,18 @@ export default class ShowsService {
             return [];
         }
     }
+
+    async buyTickets(showId, seatsIds) {
+        try {
+            const response = await axios.patch(`${url}/${showId}/buy-tickets`, {
+                seatsId: seatsIds
+            });
+            console.log(`ID of bought tickets: ${response.data}`);
+        }
+        catch (e) {
+            if (e.response !== undefined) {
+                console.error(e.response.data);
+            }
+        }
+    }
 }
