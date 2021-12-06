@@ -22,7 +22,16 @@ function Movie(props) {
         </tr>
     )
 }
+const isGuid = function(props, propName, componentName) {
+    const regex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
+    
+    if (!regex.test(props[propName])) {
+      return new Error(`Invalid prop ${propName} passed to ${componentName}. Expected a Guid.`);
+    }
+  }
+
 Movie.propTypes = {
+    id: isGuid,
     title: PropTypes.string,
     durationHours: PropTypes.number,
     durationMinutes: PropTypes.number,
