@@ -12,6 +12,7 @@ import DeleteShow from './Components/Shows/DeleteShow';
 import CurrentShows from './Components/Shows/CurrentShows';
 import EditMovie from './Components/Movies/EditMovie';
 import EditShow from './Components/Shows/EditShow';
+import MoviePopularity from './Components/Movies/MoviePopularity';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
               <Link className="nav-link" to="/movies">Filmy</Link>
+              <Link className="nav-link" to="/movies/popularity">Popularność filmu</Link>
               <Link className="nav-link" to="/shows">Seanse</Link>
               <Link className="nav-link" to="/shows/now">Trwające seanse</Link>
               <Link className="nav-link" to="/calendar">Kalendarz</Link>
@@ -41,6 +43,7 @@ function App() {
               <Route path="/movies/add" element={<AddMovie />} />
               <Route path="/movies/delete/:id" element={<DeleteMovie />} />
               <Route path="/movies/edit/:id" element={<EditMovie />} />
+              <Route path="/movies/popularity" element={<MoviePopularity />} />
               <Route path="/shows" element={<Shows />} />
               <Route path="/shows/now" element={<CurrentShows />} />
               <Route path="/shows/add" element={<AddShow />} />
