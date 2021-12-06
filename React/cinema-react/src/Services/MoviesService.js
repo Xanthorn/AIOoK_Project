@@ -78,13 +78,13 @@ export default class MoviesService {
         try {
             const response = await axios.get(`${url}/${id}/${year}/${month}/${day}`);
 
-            return response.data;
+            return [response.data.numberOfShows, response.data.soldTickets, response.data.availableTickets];
         }
         catch (e) {
             if (e.response !== undefined) {
                 console.error(e.response.data);
             }
-            return {};
+            return [];
         }
     }
 }

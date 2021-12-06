@@ -101,7 +101,7 @@ namespace Cinema.API.Controllers
 
         [HttpGet(ApiRoutes.Movies.GetPopularityOfMovieByDate)]
         public async Task<IActionResult> GetPopularityOfMovieByDate([FromRoute] Guid id, [FromRoute] int year, [FromRoute] int month, [FromRoute] int day)
-        {
+         {
             GetPopularityOfMovieByDateRequest request = new()
             {
                 Id = id,
