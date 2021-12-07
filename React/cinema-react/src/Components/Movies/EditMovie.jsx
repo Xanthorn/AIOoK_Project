@@ -9,7 +9,7 @@ export default function EditMovie() {
     const [hours, setHours] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const navigate = useNavigate();
-    const [movie, setMovie] = useState();
+    const [movie, setMovie] = useState({});
 
     useEffect(function effectFunction() {
         async function fetchMovie() {
@@ -20,12 +20,15 @@ export default function EditMovie() {
 
             if (fetchedMovie != null) {
                 setMovie(fetchedMovie);
+                setHours(fetchedMovie.durationHours);
+                setMinutes(fetchedMovie.durationMinutes);
+                setTitle(fetchedMovie.title);
             }
         }
 
         fetchMovie();
 
-    }, [id, setMovie]);
+    }, [id, setMovie, setHours, setMinutes, setTitle]);
 
     async function editMovie() {
         const moviesService = new MoviesService();
@@ -49,8 +52,8 @@ export default function EditMovie() {
                                     <div className="row mb-3">
                                         <div className="col">
                                             <div className="form-floating">
-                                                <input type="text" className="form-control" id="title" placeholder="movie name" onChange={e => setTitle(e.target.value)} />
-                                                <label htmlFor="title">{movie != null ? (movie.title) : (<h2>...</h2>) }</label>
+                                                <input type="text" defaultValue={movie != null ? (movie.title) : (" ") } className="form-control" id="title" placeholder="movie name" onChange={e => setTitle(e.target.value)} />
+                                                <label htmlFor="title">Tytuł filmu</label>
                                             </div>
                                         </div>
                                     </div>
@@ -58,9 +61,9 @@ export default function EditMovie() {
                                         <div className="col">
                                             <label htmlFor="hours" className="form-label">Czas trwania</label>
                                             <div className="input-group">
-                                                <input type="text" className="form-control" placeholder={movie != null ? (movie.durationHours) : (<h2>...</h2>)}  id="hours" onChange={e => setHours(e.target.value)} />
+                                                <input type="text" className="form-control" defaultValue={movie != null ? (movie.durationHours) : (0)}  id="hours" onChange={e => setHours(e.target.value)} />
                                                 <span className="input-group-text">:</span>
-                                                <input type="text" className="form-control" placeholder={movie != null ? (movie.durationMinutes) : (<h2>...</h2>)}  id="minutes" onChange={e => setMinutes(e.target.value)} />
+                                                <input type="text" className="form-control" defaultValue={movie != null ? (movie.durationMinutes) : (0)}  id="minutes" onChange={e => setMinutes(e.target.value)} />
                                             </div>
                                         </div>
                                     </div>
