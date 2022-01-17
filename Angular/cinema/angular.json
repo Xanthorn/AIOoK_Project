@@ -1,12 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "cli": {
-    "analytics": false
-  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "cinema-angular": {
+    "cinema": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -20,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/cinema-angular",
+            "outputPath": "dist/cinema",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -30,13 +27,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-                "./node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "src/styles.css"
             ],
-            "scripts": [
-              "./node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -75,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "cinema-angular:build:production"
+              "browserTarget": "cinema:build:production"
             },
             "development": {
-              "browserTarget": "cinema-angular:build:development"
+              "browserTarget": "cinema:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "cinema-angular:build"
+            "browserTarget": "cinema:build"
           }
         },
         "test": {
@@ -101,17 +94,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-                "./node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "src/styles.css"
             ],
-            "scripts": [
-              "./node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ]
+            "scripts": []
           }
         }
       }
     }
   },
-  "defaultProject": "cinema-angular"
+  "defaultProject": "cinema"
 }
