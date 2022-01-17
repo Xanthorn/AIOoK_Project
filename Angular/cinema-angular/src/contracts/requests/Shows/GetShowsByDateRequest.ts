@@ -1,6 +1,5 @@
-export class GetShowsByDateRequest {
-
-    constructor(public year: number, public month: number, public day: number){
-        
-    }
+export interface GetShowsByDateRequest {
+    year: number,
+    month: number,
+    day: number
 }

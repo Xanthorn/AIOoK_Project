@@ -1,8 +1,6 @@
 import { ErrorResponse } from "../Common/ErrorResponse";
 
-export class CreateMovieResponse {
-
-    constructor(public movieId: string, public errorResponse: ErrorResponse){
-        
-    }
+export interface CreateMovieResponse {
+    movieId: string,
+    errorResponse: ErrorResponse
 }

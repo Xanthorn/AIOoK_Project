@@ -1,9 +1,7 @@
 import { Show } from "src/classes/Show";
 import { ErrorResponse } from "../Common/ErrorResponse";
 
-export class GetShowsResponse {
-
-    constructor(public shows: Show[], public errorResponse: ErrorResponse){
-        
-    }
+export interface GetShowsResponse {
+    shows: Show[], 
+    errorResponse: ErrorResponse
 }

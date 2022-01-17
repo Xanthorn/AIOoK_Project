@@ -1,8 +1,6 @@
 import { ErrorResponse } from "../Common/ErrorResponse";
 
-export class EditShowResponse {
-
-    constructor(public showId: string, public errorResponse: ErrorResponse){
-        
-    }
+export interface EditShowResponse {
+    showId: string,
+    errorResponse: ErrorResponse
 }

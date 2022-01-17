@@ -1,8 +1,9 @@
 import { ErrorResponse } from "../Common/ErrorResponse";
 
-export class GetPopularityOfMovieByDateResponse {
-
-    constructor(public numberOfShows: number, public sumOfTickets: number, public availableTickets: number, public soldTickets: number, public errorResponse: ErrorResponse){
-        
-    }
+export interface GetPopularityOfMovieByDateResponse {
+    numberOfShows: number,
+    sumOfTickets: number,
+    availableTickets: number,
+    soldTickets: number,
+    errorResponse: ErrorResponse
 }

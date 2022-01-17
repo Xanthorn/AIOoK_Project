@@ -1,6 +1,5 @@
-export class CreateShowRequest {
-
-    constructor(public date: Date, public movieId: string, public auditoriumId: string){
-        
-    }
+export interface CreateShowRequest {
+    date: Date, 
+    movieId: string,
+    auditoriumId: string
 }

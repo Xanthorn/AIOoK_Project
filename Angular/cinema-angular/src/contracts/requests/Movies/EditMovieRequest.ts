@@ -1,6 +1,5 @@
-export class EditMovieRequest {
-
-    constructor(public title: string, public durationHours: number, public durationMinutes: number){
-        
-    }
+export interface EditMovieRequest {
+    title: string,
+    durationHours: number,
+    durationMinutes: number
 }

@@ -1,6 +1,4 @@
-export class ErrorResponse {
-
-    constructor(public message: string, public errorCode: number){
-        
-    }
+export interface ErrorResponse {
+    message: string,
+    errorCode: number
 }

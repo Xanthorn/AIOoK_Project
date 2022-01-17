@@ -1,6 +1,3 @@
-export class BuyTicketsRequest {
-
-    constructor(public seatsId: string[]){
-        
-    }
+export interface BuyTicketsRequest {
+    seatsId: string[]
 }

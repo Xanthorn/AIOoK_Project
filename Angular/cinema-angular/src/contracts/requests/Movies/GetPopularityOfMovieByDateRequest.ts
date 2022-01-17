@@ -1,6 +1,4 @@
-export class GetPopularityOfMovieByDateRequest {
-
-    constructor(public id: string, public date: Date){
-        
-    }
+export interface GetPopularityOfMovieByDateRequest {
+    id: string,
+    date: Date
 }
