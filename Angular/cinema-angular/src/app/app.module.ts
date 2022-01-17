@@ -8,6 +8,11 @@ import { MoviesComponent } from './movies/movies.component';
 import { EditMovieComponent } from './edit-movie/edit-movie.component';
 import { DeleteMovieComponent } from './delete-movie/delete-movie.component';
 import { AddMovieComponent } from './add-movie/add-movie.component';
+import { ShowDetailsComponent } from './shows/show-details/show-details.component';
+import { ShowsListComponent } from './shows/shows-list/shows-list.component';
+import { ShowAddComponent } from './shows/show-add/show-add.component';
+import { ShowEditComponent } from './shows/show-edit/show-edit.component';
+import { ShowDeleteComponent } from './shows/show-delete/show-delete.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +21,12 @@ import { AddMovieComponent } from './add-movie/add-movie.component';
     MoviesComponent,
     EditMovieComponent,
     DeleteMovieComponent,
-    AddMovieComponent
+    AddMovieComponent,
+    ShowDetailsComponent,
+    ShowsListComponent,
+    ShowAddComponent,
+    ShowEditComponent,
+    ShowDeleteComponent
   ],
   imports: [
     BrowserModule,
