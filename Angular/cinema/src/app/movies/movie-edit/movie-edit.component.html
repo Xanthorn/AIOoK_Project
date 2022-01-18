@@ -4,7 +4,8 @@
             <div class="container border rounded mt-4">
                 <div class="row mt-4 mb-4">
                     <div class="col">
-                        <h1 class="text-center display-4">Dodaj film</h1>
+                        <h1 class="text-center display-4">Edytuj film
+                        </h1>
                     </div>
                 </div>
                 <div class="row justify-content-center">
@@ -12,18 +13,21 @@
                         <form [formGroup]="form">
                             <div class="mb-3">
                                 <label for="title" class="form-label" formControlName="title">Tytuł filmu</label>
-                                <input type="email" class="form-control" id="title" placeholder="Władcy Pierścieni">
+                                <input type="email" class="form-control" id="title" placeholder="Władcy Pierścieni"
+                                    [defaultValue]="movie.title">
                             </div>
 
                             <label for="time" class="form-label">Czas trwania</label>
                             <div aria-label="time" class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="1" id="hours">
+                                <input type="text" class="form-control" placeholder="1" id="hours" formControlName="hours"
+                                    [defaultValue]="movie.durationHours">
                                 <span class="input-group-text">:</span>
-                                <input type="text" class="form-control" placeholder="35" id="minutes">
+                                <input type="text" class="form-control" placeholder="35" id="minutes" formControlName="minutes"
+                                    [defaultValue]="movie.durationMinutes">
                             </div>
 
                             <div class="mb-3 text-center">
-                                <button class="btn btn-primary" type="submit">Dodaj film</button>
+                                <button class="btn btn-primary" type="submit">Zapisz zmiany</button>
                                 <a class="btn btn-outline-dark" type="submit" routerLink="/movies">Anuluj</a>
                             </div>
                         </form>
