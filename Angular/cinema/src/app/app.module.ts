@@ -7,10 +7,10 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { MovieAddComponent } from './movies/movie-add/movie-add.component';
-//import { MovieEditComponent } from './movies/movie-edit/movie-edit.component';
 import { MovieComponent } from './movies/movie/movie.component';
 import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { MovieDeleteComponent } from './movies/movie-delete/movie-delete.component';
+import { MovieEditComponent } from './movies/movie-edit/movie-edit.component';
 
 @NgModule({
   declarations: [
@@ -18,10 +18,10 @@ import { MovieDeleteComponent } from './movies/movie-delete/movie-delete.compone
     HeaderComponent,
     HomeComponent,
     MovieAddComponent,
-    //MovieEditComponent,
     MovieComponent,
     MovieListComponent,
     MovieDeleteComponent
+    MovieEditComponent
   ],
   imports: [
     BrowserModule,
