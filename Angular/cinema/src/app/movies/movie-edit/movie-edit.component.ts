@@ -20,16 +20,16 @@ export class MovieEditComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      title: [ '', [
+      title: [ this.movie.title, [
         Validators.required,
         Validators.maxLength(200)
       ]],
-      hours: [ '', [
+      hours: [ this.movie.durationHours, [
         Validators.required,
         Validators.min(0),
         Validators.max(9)
       ]],
-      minutes: [ '', [
+      minutes: [ this.movie.durationMinutes, [
         Validators.required,
         Validators.min(0),
         Validators.max(59)
@@ -40,4 +40,7 @@ export class MovieEditComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  submitForm() {
+
+  }
 }
