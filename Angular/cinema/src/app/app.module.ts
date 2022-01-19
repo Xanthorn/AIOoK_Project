@@ -11,6 +11,11 @@ import { MovieComponent } from './movies/movie/movie.component';
 import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { MovieDeleteComponent } from './movies/movie-delete/movie-delete.component';
 import { MovieEditComponent } from './movies/movie-edit/movie-edit.component';
+import { ShowDetailsComponent } from './shows/show-details/show-details.component';
+import { ShowsListComponent } from './shows/shows-list/shows-list.component';
+import { ShowAddComponent } from './shows/show-add/show-add.component';
+import { ShowEditComponent } from './shows/show-edit/show-edit.component';
+import { ShowDeleteComponent } from './shows/show-delete/show-delete.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +25,13 @@ import { MovieEditComponent } from './movies/movie-edit/movie-edit.component';
     MovieAddComponent,
     MovieComponent,
     MovieListComponent,
-    MovieDeleteComponent
-    MovieEditComponent
+    MovieDeleteComponent,
+    MovieEditComponent,
+    ShowDetailsComponent,
+    ShowsListComponent,
+    ShowAddComponent,
+    ShowEditComponent,
+    ShowDeleteComponent
   ],
   imports: [
     BrowserModule,
