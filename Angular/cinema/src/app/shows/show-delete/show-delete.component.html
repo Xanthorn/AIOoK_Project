@@ -1,1 +1,55 @@
-<p>show-delete works!</p>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div class="container border rounded mt-4">
+                <div class="row mt-4 mb-4">
+                    <div class="col">
+                        <h1 class="text-center display-4">Czy na pewno usunąć ten seans?</h1>
+                    </div>
+                </div>
+                <div class="row mt-4 mb-4 justify-content-center">
+                    <div class="col-10">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    Id seansu
+                                </div>
+                                <div class="col">
+                                    {{show.id}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    Tytuł filmu
+                                </div>
+                                <div class="col">
+                                    {{show.movie.title}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    Data seansu
+                                </div>
+                                <div class="col">
+                                    {{show.date}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center mb-4">
+                    <div class="col-10">
+                        <div class="container">
+                            <div class="input-group">
+                                <div class="col text-center">
+                                    <button class="btn btn-outline-secondary" (click)="deleteShow()">Tak</button>
+                                    <button class="btn btn-outline-secondary" routerLink="/shows">Nie</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

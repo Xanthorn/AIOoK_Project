@@ -5,14 +5,15 @@ export class Show {
     id: string;
     date: Date;
     movie: Movie;
-    aduditorium: Auditorium;
+    auditorium: Auditorium;
     soldTickets: number;
     availableTickets: number;
+
     constructor() {
         this.id = '',
         this.date = new Date,
         this.movie = new Movie,
-        this.aduditorium = new Auditorium,
+        this.auditorium = new Auditorium,
         this.soldTickets = 0,
         this.availableTickets = 0
     }

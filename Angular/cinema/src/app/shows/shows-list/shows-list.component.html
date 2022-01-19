@@ -1,1 +1,32 @@
-<p>shows-list works!</p>
+<div class="container">
+    <div class="row pb-4">
+        <div class="col">
+            <h1 class="display-4 text-center">Lista seansów</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-end">
+            <a class="btn btn-primary" routerLink="/shows/add">
+                Dodaj nowy seans
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">Data</th>
+                        <th class="text-center">Film</th>
+                        <th class="text-center">Sala</th>
+                        <th class="text-center">Sprzedanych</th>
+                        <th class="text-center">Dostępnych</th>
+                        <th class="text-center col-1">Zarządzanie</th>
+                    </tr>
+                </thead>
+                <!--<tbody app-show-details [shows]="shows">
+                </tbody>-->
+            </table>
+        </div>
+    </div>
+</div>
