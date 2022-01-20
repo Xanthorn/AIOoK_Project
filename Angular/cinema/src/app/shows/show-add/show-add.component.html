@@ -1,0 +1,55 @@
+<div class="container">
+    <!--<div ng-if="auditoriums.length == 0">
+        <div class="row mt-4 mb-4">
+            <div class="col">
+                <h1 class="display-4 text-center">😭 Nie można dodać filmu 😭</h1>
+                <h2 class="display-5 text-center">Nie udało się załadować list sal.</h2>
+            </div>
+        </div>
+    </div>
+    <div ng-if="movies.length == 0">
+        <div class="row mt-4 mb-4">
+            <div class="col">
+                <h1 class="display-4 text-center">😭 Nie można dodać filmu 😭</h1>
+                <h2 class="display-5 text-center">Nie udało się załadować listy filmów.</h2>
+            </div>
+        </div>
+    </div>-->
+        <div>
+            <div class="row mt-4 mb-4">
+                <div class="col">
+                    <h1 class="h1 display-4 text-center">Dodaj seans</h1>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <form [formGroup]="form" (ngSubmit)="submitForm()">
+
+                        <label for="movie" class="form-label">Film</label>
+                        <select formControlName="movie" id="movie">
+                          <option *ngFor="let movie of movies; let i = index" [value]="movies[i].id">
+                            {{movies[i].title}}
+                          </option>
+                        </select>
+                        <br>
+                        <label for="date" class="form-label">Data</label>
+                            <div aria-label="date" class="input-group mb-3">
+                                <input type="datetime-local" class="form-control" placeholder="20.01.2020" formControlName="date">
+                            </div>
+
+                        <label for="auditorium" class="form-label">Sala</label>
+                        <select formControlName="auditorium" id="auditorium">
+                          <option *ngFor="let auditorium of auditoriums; let i = index" [value]="auditoriums[i].id">
+                            {{auditoriums[i].number}}
+                          </option>
+                        </select>
+                        
+                        <div class="mb-3 text-center">
+                            <button class="btn btn-primary" type="submit">Dodaj seans</button>
+                            <a class="btn btn-outline-dark" routerLink="/shows">Anuluj</a>
+                        </div>
+                      </form>
+                    </div>
+                </div>
+            </div>
+        </div>

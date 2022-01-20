@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row pb-4">
+        <div class="col">
+            <h1 class="display-4 text-center">Lista filmów</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-end">
+            <a class="btn btn-primary" routerLink="/movies/add">
+                Dodaj nowy film
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">Tytuł</th>
+                        <th class="text-center">Długość</th>
+                        <th class="text-center col-1">Zarządzanie</th>
+                    </tr>
+                </thead>
+                <tbody app-movie [movies]="movies">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
