@@ -15,4 +15,7 @@ export class MoviesService {
     return this.httpClient.get<any>(this.baseUrl).toPromise();
   }
 
+  getMovieById(id: string) {
+    return this.httpClient.get<any>(`${this.baseUrl}/${id}`).toPromise();
+  }
 }
