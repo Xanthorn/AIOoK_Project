@@ -30,12 +30,10 @@ export class ShowEditComponent implements OnInit {
       date: [ '', [
         Validators.required
       ]],
-      movie: [''],
-      auditorium: [''],
-      sold: [ '', [
+      movieId: ['', [
         Validators.required,
       ]],
-      available: [ '', [
+      auditoriumId: ['', [
         Validators.required,
       ]]
     });

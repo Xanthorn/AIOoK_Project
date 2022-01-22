@@ -27,10 +27,10 @@ export class ShowAddComponent implements OnInit {
       date: [ '', [
         Validators.required
       ]],
-      movie: ['', [
+      movieId: ['', [
         Validators.required,
       ]],
-      auditorium: ['', [
+      auditoriumId: ['', [
         Validators.required,
       ]]
     });

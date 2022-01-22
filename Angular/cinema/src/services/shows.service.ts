@@ -26,7 +26,7 @@ export class ShowsService {
   }
 
   editShow(id: string, request: EditShowRequest) {
-    return this.httpClient.put<any>(`${this.baseUrl}/${id}`, request).toPromise();
+    return this.httpClient.patch<any>(`${this.baseUrl}/${id}`, request).toPromise();
   }
 
   deleteShow(id: string) {
