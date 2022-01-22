@@ -16,11 +16,21 @@
             <table class="table table-responsive table-hover">
                 <thead>
                     <tr>
-                        <th class="text-center">Data</th>
-                        <th class="text-center">Film</th>
-                        <th class="text-center">Sala</th>
-                        <th class="text-center">Sprzedanych</th>
-                        <th class="text-center">Dostępnych</th>
+                        <th class="text-center">Data
+                            <a (click)="handleClickDate()">{{alphabeticalDate ? '▲' : '▼'}}</a>
+                        </th>
+                        <th class="text-center">Film
+                            <a (click)="handleClickMovie()">{{alphabeticalMovie ? '▲' : '▼'}}</a>
+                        </th>
+                        <th class="text-center">Sala
+                            <a (click)="handleClickAuditorium()">{{alphabeticalAuditorium ? '▲' : '▼'}}</a>
+                        </th>
+                        <th class="text-center">Sprzedanych
+                            <a (click)="handleClickSoldTickets()">{{alphabeticalSoldTickets ? '▲' : '▼'}}</a>
+                        </th>
+                        <th class="text-center">Dostępnych
+                            <a (click)="handleClickAvailableTickets()">{{alphabeticalAvailableTickets ? '▲' : '▼'}}</a>
+                        </th>
                         <th class="text-center col-1">Zarządzanie</th>
                     </tr>
                 </thead>
