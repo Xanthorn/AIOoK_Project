@@ -16,8 +16,10 @@
             <table class="table table-responsive table-hover">
                 <thead>
                     <tr>
-                        <th class="text-center">Tytuł</th>
-                        <th class="text-center">Długość</th>
+                        <th class="text-center">Tytuł 
+                            <a (click)="handleClickTitle()">{{alphabeticalTitle ? '▲' : '▼'}}</a></th>
+                        <th class="text-center">Długość
+                            <a (click)="handleClickLength()">{{alphabeticalLength ? '▲' : '▼'}}</a></th>
                         <th class="text-center col-1">Zarządzanie</th>
                     </tr>
                 </thead>
