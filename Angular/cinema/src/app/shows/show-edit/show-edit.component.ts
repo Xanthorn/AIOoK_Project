@@ -7,6 +7,7 @@ import { Show } from 'src/models/Show';
 import { ShowsService } from 'src/services/shows.service';
 import { ActivatedRoute ,Router } from '@angular/router';
 import { MoviesService } from 'src/services/movies.service';
+import { AuditoriumsService } from 'src/services/auditoriums.service';
 
 @Component({
   selector: 'app-show-edit',
@@ -18,12 +19,13 @@ export class ShowEditComponent implements OnInit {
 
   id?: string | null = '';
   movies: Movie[] = [];
-  auditoriums: Auditorium[];
+  auditoriums: Auditorium[] = [];
   show?: Show;
 
   request?: EditShowRequest;
 
-  constructor(private fb: FormBuilder, private showsService: ShowsService, private moviesService: MoviesService, private router: Router, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private showsService: ShowsService, private moviesService: MoviesService, 
+    private auditoriumsService: AuditoriumsService, private router: Router, private route: ActivatedRoute) {
     this.form = this.fb.group({
       date: [ '', [
         Validators.required
@@ -37,16 +39,14 @@ export class ShowEditComponent implements OnInit {
         Validators.required,
       ]]
     });
-    this.auditoriums = this.getAuditorium();
-  }
-
-  getAuditorium(){
-    return [new Auditorium(), new Auditorium()];
   }
 
   async ngOnInit(): Promise<void> {
-      this.movies = await this.moviesService.getMovies();
-      console.log("Movies was fetched correctly");
+    this.movies = await this.moviesService.getMovies();
+    console.log("Movies was fetched correctly");
+
+    this.auditoriums = await this.auditoriumsService.getAuditoriums();
+    console.log("Auditoriums was fetched correctly");
 
     this.id = this.route.snapshot.paramMap.get('id');
 

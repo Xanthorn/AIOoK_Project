@@ -6,6 +6,7 @@ import { Movie } from 'src/models/Movie';
 import { ShowsService } from 'src/services/shows.service';
 import { Router } from '@angular/router';
 import { MoviesService } from 'src/services/movies.service';
+import { AuditoriumsService } from 'src/services/auditoriums.service';
 
 @Component({
   selector: 'app-show-add',
@@ -16,71 +17,36 @@ export class ShowAddComponent implements OnInit {
 
   form: FormGroup;
   movies: Movie[] = [];
-  auditoriums: Auditorium[];
+  auditoriums: Auditorium[] = [];
 
   request?: CreateShowRequest;
 
-  constructor(private fb: FormBuilder, private showsService: ShowsService, private moviesService: MoviesService, private router: Router) { 
+  constructor(private fb: FormBuilder, private showsService: ShowsService, private moviesService: MoviesService, 
+    private auditoriumsService: AuditoriumsService, private router: Router) { 
     this.form = this.fb.group({
       date: [ '', [
         Validators.required
       ]],
-      movie: [''],
-      /*this.fb.group({
-        title: [ '', [
-          Validators.required,
-          Validators.maxLength(200)
-        ]],
-        hours: [ '', [
-          Validators.required,
-          Validators.min(0),
-          Validators.max(9)
-        ]],
-        minutes: [ '', [
-          Validators.required,
-          Validators.min(0),
-          Validators.max(59)
-        ]]
-      }),*/
-      auditorium: [''],
-      /*this.fb.group({
-        number: ['', [
-          Validators.required,
-        ]],
-        rows: ['', [
-          Validators.required,
-        ]],
-        seatsInRow: ['', [
-          Validators.required,
-        ]],
-        capacity: ['', [
-          Validators.required,
-        ]],
-        seats: ['', [
-          Validators.required,
-        ]]
-      }),*/
-      sold: [ '', [
+      movie: ['', [
         Validators.required,
       ]],
-      available: [ '', [
+      auditorium: ['', [
         Validators.required,
       ]]
     });
-    this.auditoriums = this.getAuditorium();
-  }
-
-  getAuditorium(){
-    return [new Auditorium(), new Auditorium()];
   }
 
   async ngOnInit(): Promise<void> {
     this.movies = await this.moviesService.getMovies();
     console.log("Movies was fetched correctly");
+
+    this.auditoriums = await this.auditoriumsService.getAuditoriums();
+    console.log("Auditoriums was fetched correctly");
   }
 
   async submitForm() {
     this.request = Object.assign({}, this.form.value);
+    console.log(this.request);
 
     if (this.request == undefined) {
       return;
