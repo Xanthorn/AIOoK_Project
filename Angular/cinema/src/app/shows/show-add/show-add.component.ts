@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CreateShowRequest } from 'src/contracts/requests/Shows/CreateShowRequest';
 import { Auditorium } from 'src/models/Auditorium';
 import { Movie } from 'src/models/Movie';
+import { ShowsService } from 'src/services/shows.service';
+import { Router } from '@angular/router';
+import { MoviesService } from 'src/services/movies.service';
 
 @Component({
   selector: 'app-show-add',
@@ -11,10 +15,12 @@ import { Movie } from 'src/models/Movie';
 export class ShowAddComponent implements OnInit {
 
   form: FormGroup;
-  movies: Movie[];
+  movies: Movie[] = [];
   auditoriums: Auditorium[];
 
-  constructor(private fb: FormBuilder) { 
+  request?: CreateShowRequest;
+
+  constructor(private fb: FormBuilder, private showsService: ShowsService, private moviesService: MoviesService, private router: Router) { 
     this.form = this.fb.group({
       date: [ '', [
         Validators.required
@@ -61,22 +67,27 @@ export class ShowAddComponent implements OnInit {
         Validators.required,
       ]]
     });
-    this.movies = this.getMovies();
     this.auditoriums = this.getAuditorium();
-  }
-
-  getMovies(){
-    return [new Movie(), new Movie()];
   }
 
   getAuditorium(){
     return [new Auditorium(), new Auditorium()];
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.movies = await this.moviesService.getMovies();
+    console.log("Movies was fetched correctly");
   }
 
-  submitForm() {
-    
+  async submitForm() {
+    this.request = Object.assign({}, this.form.value);
+
+    if (this.request == undefined) {
+      return;
+    }
+
+    await this.showsService.createShow(this.request)
+
+    this.router.navigateByUrl("/shows");
   }
 }
