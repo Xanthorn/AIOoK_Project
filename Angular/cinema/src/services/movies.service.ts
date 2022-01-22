@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CreateMovieRequest } from 'src/contracts/requests/Movies/CreateMovieRequest';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -17,5 +18,9 @@ export class MoviesService {
 
   getMovieById(id: string) {
     return this.httpClient.get<any>(`${this.baseUrl}/${id}`).toPromise();
+  }
+
+  createMovie(request: CreateMovieRequest) {
+    return this.httpClient.post<any>(this.baseUrl, request).toPromise();
   }
 }

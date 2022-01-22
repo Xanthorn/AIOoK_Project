@@ -14,7 +14,7 @@ export class MovieListComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.movies = await this.moviesService.getMovies();
-    console.log(this.movies);
+    console.log("Movies was fetched correctly");
   }
 
 }
