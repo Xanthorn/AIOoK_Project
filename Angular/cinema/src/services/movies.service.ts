@@ -32,4 +32,8 @@ export class MoviesService {
   deleteMovie(id: string) {
     return this.httpClient.delete<any>(`${this.baseUrl}/${id}`).toPromise();
   }
+
+  getPopularityOfMovieByDate(id: string, year: number, month: number, day: number) {
+    return this.httpClient.get<any>(`${this.baseUrl}/${id}/${year}/${month}/${day}`).toPromise();
+  }
 }
