@@ -13,14 +13,55 @@
                         <form [formGroup]="form" (ngSubmit)="submitForm()">
                             <div class="mb-3">
                                 <label for="title" class="form-label">Tytuł filmu</label>
-                                <input type="email" class="form-control" id="title" formControlName="title" placeholder="Władcy Pierścieni">
+                                <input type="email" class="form-control" id="title" formControlName="title"
+                                    placeholder="Władcy Pierścieni">
+                                <div *ngIf="form.controls['title'].errors?.['required'] && form.controls['title'].touched"
+                                    class="text-danger">
+                                    Wprowadź tytuł
+                                </div>
+                                <div *ngIf="form.controls['title'].errors?.['maxlength'] && form.controls['title'].touched"
+                                    class="text-danger">
+                                    Maksymalna długość tytułu filmu to 200 znaków
+                                </div>
                             </div>
 
-                            <label for="time" class="form-label">Czas trwania</label>
-                            <div aria-label="time" class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="1" id="hours" formControlName="hours">
-                                <span class="input-group-text">:</span>
-                                <input type="text" class="form-control" placeholder="35" id="minutes" formControlName="minutes">
+                            <div class="mb-3">
+                                <label for="time" class="form-label">Czas trwania</label>
+                                <div aria-label="time" class="input-group">
+                                    <input type="text" class="form-control" placeholder="1" id="hours"
+                                        formControlName="durationHours">
+                                    <span class="input-group-text">:</span>
+                                    <input type="text" class="form-control" placeholder="35" id="minutes"
+                                        formControlName="durationMinutes">
+                                </div>
+
+                                <div>
+                                    <div *ngIf="form.controls['durationHours'].errors?.['required'] && form.controls['durationHours'].touched"
+                                        class="text-danger">
+                                        Wprowadź liczbę godzin
+                                    </div>
+                                    <div *ngIf="form.controls['durationHours'].errors?.['max'] && form.controls['durationHours'].touched"
+                                        class="text-danger">
+                                        Maksymalna wartość dla liczby godzin to 9
+                                    </div>
+                                    <div *ngIf="form.controls['durationHours'].errors?.['min'] && form.controls['durationHours'].touched"
+                                        class="text-danger">
+                                        Minimalna wartość dla liczby godzin to 0
+                                    </div>
+
+                                    <div *ngIf="form.controls['durationMinutes'].errors?.['required'] && form.controls['durationMinutes'].touched"
+                                        class="text-danger">
+                                        Wprowadź liczbę minut
+                                    </div>
+                                    <div *ngIf="form.controls['durationMinutes'].errors?.['max'] && form.controls['durationMinutes'].touched"
+                                        class="text-danger">
+                                        Maksymalna wartość dla liczby minut to 59
+                                    </div>
+                                    <div *ngIf="form.controls['durationMinutes'].errors?.['min'] && form.controls['durationMinutes'].touched"
+                                        class="text-danger">
+                                        Minimalna wartość dla liczby godzin to 0
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="mb-3 text-center">
