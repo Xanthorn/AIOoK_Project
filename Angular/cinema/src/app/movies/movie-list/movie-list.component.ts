@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie } from 'src/models/Movie';
+import { MoviesService } from 'src/services/movies.service';
 
 @Component({
   selector: 'app-movie-list',
@@ -9,15 +10,11 @@ import { Movie } from 'src/models/Movie';
 export class MovieListComponent implements OnInit {
   movies: Movie[] = [];
 
-  constructor() { }
+  constructor(private moviesService: MoviesService) { }
 
-  ngOnInit(): void {
-    let movie = new Movie();
-    movie.id = "1";
-    movie.title = "Harry Potter";
-    movie.durationHours = 1;
-    movie.durationMinutes = 45;
-    this.movies.push(movie);
+  async ngOnInit(): Promise<void> {
+    this.movies = await this.moviesService.getMovies();
+    console.log(this.movies);
   }
 
 }

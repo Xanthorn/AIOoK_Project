@@ -16,6 +16,7 @@ import { ShowsListComponent } from './shows/shows-list/shows-list.component';
 import { ShowAddComponent } from './shows/show-add/show-add.component';
 import { ShowEditComponent } from './shows/show-edit/show-edit.component';
 import { ShowDeleteComponent } from './shows/show-delete/show-delete.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ShowDeleteComponent } from './shows/show-delete/show-delete.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
