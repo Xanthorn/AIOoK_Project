@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Auditorium } from 'src/models/Auditorium';
-import { Movie } from 'src/models/Movie';
 import { Show } from 'src/models/Show';
+import { ShowsService } from 'src/services/shows.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-show-delete',
@@ -10,21 +10,23 @@ import { Show } from 'src/models/Show';
 })
 export class ShowDeleteComponent implements OnInit {
 
-  show: Show = {
-    id: "1",
-    date: new Date,
-    movie: new Movie,
-    auditorium: new Auditorium,
-    soldTickets: 10,
-    availableTickets: 2
+  id?: string | null = '';
+  show!: Show;
+
+  constructor(private showsService: ShowsService, private router: Router, private route: ActivatedRoute) { }
+
+  async ngOnInit(): Promise<void> {
+    this.id = this.route.snapshot.paramMap.get('id');
+
+    if(this.id !== null) {
+      this.show = await this.showsService.getShowById(this.id);
+    }
   }
 
-  constructor() { }
+  async deleteShow(){
+    this.id = this.route.snapshot.paramMap.get('id');
+    await this.showsService.deleteShow(this.id!)
 
-  ngOnInit(): void {
-  }
-
-  deleteShow(){
-    
+    this.router.navigateByUrl("/shows");
   }
 }

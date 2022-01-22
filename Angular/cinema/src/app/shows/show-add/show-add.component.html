@@ -26,9 +26,9 @@
                     <form [formGroup]="form" (ngSubmit)="submitForm()">
 
                         <label for="movie" class="form-label">Film</label>
-                        <select formControlName="movie" id="movie">
-                          <option *ngFor="let movie of movies; let i = index" [value]="movies[i].id">
-                            {{movies[i].title}}
+                        <select formControlName="movieId" id="movie">
+                          <option *ngFor="let movie of movies" [value]="movie.id">
+                            {{movie.title}}
                           </option>
                         </select>
                         <br>
@@ -38,9 +38,9 @@
                             </div>
 
                         <label for="auditorium" class="form-label">Sala</label>
-                        <select formControlName="auditorium" id="auditorium">
-                          <option *ngFor="let auditorium of auditoriums; let i = index" [value]="auditoriums[i].id">
-                            {{auditoriums[i].number}}
+                        <select formControlName="auditoriumId" id="auditorium">
+                          <option *ngFor="let auditorium of auditoriums" [value]="auditorium.id">
+                            {{auditorium.number}}
                           </option>
                         </select>
                         

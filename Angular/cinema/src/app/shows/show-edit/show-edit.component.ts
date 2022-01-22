@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EditShowRequest } from 'src/contracts/requests/Shows/EditShowRequest';
 import { Auditorium } from 'src/models/Auditorium';
 import { Movie } from 'src/models/Movie';
 import { Show } from 'src/models/Show';
+import { ShowsService } from 'src/services/shows.service';
+import { ActivatedRoute ,Router } from '@angular/router';
+import { MoviesService } from 'src/services/movies.service';
+import { AuditoriumsService } from 'src/services/auditoriums.service';
 
 @Component({
   selector: 'app-show-edit',
@@ -12,48 +17,53 @@ import { Show } from 'src/models/Show';
 export class ShowEditComponent implements OnInit {
   form: FormGroup;
 
-  movies: Movie[];
-  auditoriums: Auditorium[];
+  id?: string | null = '';
+  movies: Movie[] = [];
+  auditoriums: Auditorium[] = [];
+  show?: Show;
 
-  show: Show = {
-    id: "1",
-    date: new Date,
-    movie: new Movie,
-    auditorium: new Auditorium,
-    soldTickets: 10,
-    availableTickets: 2
-  };
+  request?: EditShowRequest;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private showsService: ShowsService, private moviesService: MoviesService, 
+    private auditoriumsService: AuditoriumsService, private router: Router, private route: ActivatedRoute) {
     this.form = this.fb.group({
       date: [ '', [
         Validators.required
       ]],
-      movie: [''],
-      auditorium: [''],
-      sold: [ '', [
+      movieId: ['', [
         Validators.required,
       ]],
-      available: [ '', [
+      auditoriumId: ['', [
         Validators.required,
       ]]
     });
-    this.movies = this.getMovies();
-    this.auditoriums = this.getAuditorium();
-   }
-
-  ngOnInit(): void {
-  }
-  getMovies(){
-    return [new Movie(), new Movie()];
   }
 
-  getAuditorium(){
-    return [new Auditorium(), new Auditorium()];
+  async ngOnInit(): Promise<void> {
+    this.movies = await this.moviesService.getMovies();
+    console.log("Movies was fetched correctly");
+
+    this.auditoriums = await this.auditoriumsService.getAuditoriums();
+    console.log("Auditoriums was fetched correctly");
+
+    this.id = this.route.snapshot.paramMap.get('id');
+
+    if(this.id !== null) {
+      this.show = await this.showsService.getShowById(this.id);
+      this.form.patchValue(this.show!);
+    }
   }
 
-  
-  submitForm(){
+  async submitForm(){
+    this.request = Object.assign({}, this.form.value);
 
+    if (this.request == undefined) {
+      return;
+    }
+
+    this.id = this.route.snapshot.paramMap.get('id');
+    await this.showsService.editShow(this.id!, this.request)
+
+    this.router.navigateByUrl("/shows");
   }
 }

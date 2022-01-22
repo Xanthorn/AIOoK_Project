@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CreateShowRequest } from 'src/contracts/requests/Shows/CreateShowRequest';
 import { Auditorium } from 'src/models/Auditorium';
 import { Movie } from 'src/models/Movie';
+import { ShowsService } from 'src/services/shows.service';
+import { Router } from '@angular/router';
+import { MoviesService } from 'src/services/movies.service';
+import { AuditoriumsService } from 'src/services/auditoriums.service';
 
 @Component({
   selector: 'app-show-add',
@@ -11,72 +16,44 @@ import { Movie } from 'src/models/Movie';
 export class ShowAddComponent implements OnInit {
 
   form: FormGroup;
-  movies: Movie[];
-  auditoriums: Auditorium[];
+  movies: Movie[] = [];
+  auditoriums: Auditorium[] = [];
 
-  constructor(private fb: FormBuilder) { 
+  request?: CreateShowRequest;
+
+  constructor(private fb: FormBuilder, private showsService: ShowsService, private moviesService: MoviesService, 
+    private auditoriumsService: AuditoriumsService, private router: Router) { 
     this.form = this.fb.group({
       date: [ '', [
         Validators.required
       ]],
-      movie: [''],
-      /*this.fb.group({
-        title: [ '', [
-          Validators.required,
-          Validators.maxLength(200)
-        ]],
-        hours: [ '', [
-          Validators.required,
-          Validators.min(0),
-          Validators.max(9)
-        ]],
-        minutes: [ '', [
-          Validators.required,
-          Validators.min(0),
-          Validators.max(59)
-        ]]
-      }),*/
-      auditorium: [''],
-      /*this.fb.group({
-        number: ['', [
-          Validators.required,
-        ]],
-        rows: ['', [
-          Validators.required,
-        ]],
-        seatsInRow: ['', [
-          Validators.required,
-        ]],
-        capacity: ['', [
-          Validators.required,
-        ]],
-        seats: ['', [
-          Validators.required,
-        ]]
-      }),*/
-      sold: [ '', [
+      movieId: ['', [
         Validators.required,
       ]],
-      available: [ '', [
+      auditoriumId: ['', [
         Validators.required,
       ]]
     });
-    this.movies = this.getMovies();
-    this.auditoriums = this.getAuditorium();
   }
 
-  getMovies(){
-    return [new Movie(), new Movie()];
+  async ngOnInit(): Promise<void> {
+    this.movies = await this.moviesService.getMovies();
+    console.log("Movies was fetched correctly");
+
+    this.auditoriums = await this.auditoriumsService.getAuditoriums();
+    console.log("Auditoriums was fetched correctly");
   }
 
-  getAuditorium(){
-    return [new Auditorium(), new Auditorium()];
-  }
+  async submitForm() {
+    this.request = Object.assign({}, this.form.value);
+    console.log(this.request);
 
-  ngOnInit(): void {
-  }
+    if (this.request == undefined) {
+      return;
+    }
 
-  submitForm() {
-    
+    await this.showsService.createShow(this.request)
+
+    this.router.navigateByUrl("/shows");
   }
 }

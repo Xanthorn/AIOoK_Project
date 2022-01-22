@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Auditorium } from 'src/models/Auditorium';
-import { Movie } from 'src/models/Movie';
 import { Show } from 'src/models/Show';
+import { ShowsService } from 'src/services/shows.service';
 
 @Component({
   selector: 'app-shows-list',
@@ -11,16 +10,10 @@ import { Show } from 'src/models/Show';
 export class ShowsListComponent implements OnInit {
   shows: Show[] = [];
 
-  constructor() { }
+  constructor(private showsService: ShowsService) { }
 
-  ngOnInit(): void {
-    let show = new Show();
-    show.id = "1";
-    show.date = new Date();
-    show.auditorium = new Auditorium;
-    show.movie = new Movie;
-    show.availableTickets = 20;
-    show.soldTickets = 1;
-    this.shows.push(show);
+  async ngOnInit(): Promise<void> {
+    this.shows = await this.showsService.getShows();
+    console.log("Shows was fetched correctly");
   }
 }
