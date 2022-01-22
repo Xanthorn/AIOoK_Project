@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from 'src/models/Movie';
+import { MoviesService } from 'src/services/movies.service';
 
 @Component({
   selector: 'app-movie-delete',
@@ -8,18 +10,23 @@ import { Movie } from 'src/models/Movie';
 })
 export class MovieDeleteComponent implements OnInit {
 
-  movie: Movie = {
-    id: "1",
-    title: "Epoka lodowcowa",
-    durationHours: 1,
-    durationMinutes: 45
+  id?: string | null = '';
+  movie!: Movie;
+
+  constructor(private moviesService: MoviesService, private router: Router, private route: ActivatedRoute) { }
+
+  async ngOnInit(): Promise<void> {
+    this.id = this.route.snapshot.paramMap.get('id');
+
+    if(this.id !== null) {
+      this.movie = await this.moviesService.getMovieById(this.id);
+    }
   }
 
-  constructor() { }
+  async deleteMovie() {
+    this.id = this.route.snapshot.paramMap.get('id');
+    await this.moviesService.deleteMovie(this.id!)
 
-  ngOnInit(): void {
-  }
-
-  deleteMovie() {
+    this.router.navigateByUrl("/movies");
   }
 }

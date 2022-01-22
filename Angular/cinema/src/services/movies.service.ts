@@ -28,4 +28,8 @@ export class MoviesService {
   editMovie(id: string, request: EditMovieRequest) {
     return this.httpClient.put<any>(`${this.baseUrl}/${id}`, request).toPromise();
   }
+
+  deleteMovie(id: string) {
+    return this.httpClient.delete<any>(`${this.baseUrl}/${id}`).toPromise();
+  }
 }
