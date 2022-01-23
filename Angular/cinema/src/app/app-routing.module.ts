@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CalendarComponent } from './calendar/calendar/calendar.component';
 import { HomeComponent } from './home/home.component';
 import { MovieAddComponent } from './movies/movie-add/movie-add.component';
 import { MovieDeleteComponent } from './movies/movie-delete/movie-delete.component';
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'shows', component: ShowsListComponent},
   { path: 'shows/add', component: ShowAddComponent },
   { path: 'shows/edit/:id', component:ShowEditComponent },
-  { path: 'shows/delete/:id', component: ShowDeleteComponent }
+  { path: 'shows/delete/:id', component: ShowDeleteComponent },
+  { path: 'calendar', component: CalendarComponent }
 ];
 
 @NgModule({
