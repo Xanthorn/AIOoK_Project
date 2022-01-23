@@ -11,30 +11,36 @@
                 <div class="row justify-content-center">
                     <div class="col-10">
                         <form [formGroup]="form" (ngSubmit)="submitForm()">
-                            <div class="mb-3">
-                                <label for="movie" class="form-label">Film</label>
-                                    <select formControlName="movieId" id="movie">
-                                        <option *ngFor="let movie of movies" [value]="movie.id">
-                                            {{movie.title}}
-                                        </option>
-                                     </select>
-                                <br>
-                            </div>
 
-                            <label for="date" class="form-label">Data</label>
-                            <div aria-label="date" class="input-group mb-3">
-                                <input type="datetime-local" class="form-control" placeholder="20.01.2020" formControlName="date">
-                            </div>
-
-                            <label for="auditorium" class="form-label">Sala</label>
-                            <select formControlName="auditoriumId" id="auditorium">
-                              <option *ngFor="let auditorium of auditoriums" [value]="auditorium.id">
-                                {{auditorium.number}}
-                              </option>
+                            <label for="movie" class="form-label">Film</label>
+                            <select class="form-select" formControlName="movieId" id="movie">
+                                <option *ngFor="let movie of movies" [value]="movie.id">
+                                    {{movie.title}}
+                                </option>
                             </select>
 
+                            <br>
+
+                            <label for="date" class="form-label">Data</label>
+                            <div aria-label="date" class="input-group">
+                                <input type="datetime-local" class="form-control" placeholder="20.01.2020"
+                                    formControlName="date">
+                            </div>
+
+                            <br>
+
+                            <label for="auditorium" class="form-label">Sala</label>
+                            <select class="form-select" formControlName="auditoriumId" id="auditorium">
+                                <option *ngFor="let auditorium of auditoriums" [value]="auditorium.id">
+                                    Nr. sali: {{auditorium.number}} (Pojemność: {{auditorium.capacity}})
+                                </option>
+                            </select>
+
+                            <br>
+
                             <div class="mb-3 text-center">
-                                <button class="btn btn-primary" type="submit">Edytuj seans</button>
+                                <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Dodaj seans</button>
+                                <span></span>
                                 <a class="btn btn-outline-dark" routerLink="/shows">Anuluj</a>
                             </div>
                         </form>
