@@ -13,7 +13,7 @@
 </tr>
 
 <tr>
-    <td *ngFor="let in of counter(daysInMonth - (7 - firstDayOfMonth + 1) - (numberOfWeeks - 2) * 7); let i = index" routerLink="/calendar/{{year}}/{{month}}/{{i + 7 - firstDayOfMonth + 2}}" class="col-1 text-center">
+    <td *ngFor="let in of counter(daysInMonth - (7 - firstDayOfMonth + 1) - (numberOfWeeks - 2) * 7); let i = index" routerLink="/calendar/{{year}}/{{month}}/{{i + 7 * (numberOfWeeks - 1) - firstDayOfMonth + 2}}" class="col-1 text-center">
         <p class="display-5">{{i + 7 * (numberOfWeeks - 1) - firstDayOfMonth + 2}}</p>
     </td>
     <td *ngFor="let in of counter(7 - (daysInMonth - (7 - firstDayOfMonth + 1) - (numberOfWeeks - 2) * 7))" class="col-1 text-center">

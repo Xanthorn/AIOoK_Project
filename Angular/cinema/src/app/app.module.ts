@@ -19,6 +19,7 @@ import { ShowDeleteComponent } from './shows/show-delete/show-delete.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CalendarComponent } from './calendar/calendar/calendar.component';
 import { CalendarGeneratorComponent } from './calendar/calendar-generator/calendar-generator.component';
+import { CalendarDayComponent } from './calendar/calendar-day/calendar-day.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { CalendarGeneratorComponent } from './calendar/calendar-generator/calend
     ShowEditComponent,
     ShowDeleteComponent,
     CalendarComponent,
-    CalendarGeneratorComponent
+    CalendarGeneratorComponent,
+    CalendarDayComponent
   ],
   imports: [
     BrowserModule,
