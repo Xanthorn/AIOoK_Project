@@ -1,6 +1,6 @@
 <tr *ngFor="let show of shows">
     <td>
-        {{show.date}}
+        {{show.date | date:'medium'}}
     </td>
     <td>
         {{show.movie.title}}
