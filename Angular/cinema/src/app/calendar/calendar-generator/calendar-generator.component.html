@@ -1,0 +1,22 @@
+<tr>
+    <td *ngFor="let in of counter(firstDayOfMonth - 1)" class="col-1 text-center"></td>
+    <td *ngFor="let in of counter(7 - firstDayOfMonth + 1); let i = index" class="col-1 text-center"
+        routerLink="/calendar/{{year}}/{{month}}/{{i + 1}}">
+        <p class="display-5">{{i + 1}}</p>
+    </td>
+</tr>
+
+<tr *ngFor="let in of counter(numberOfWeeks - 2); let i = index">
+    <td *ngFor="let in of counter(7); let j = index" class="col-1 text-center" routerLink="/calendar/{{year}}/{{month}}/{{(j + 7 - firstDayOfMonth + 2) + 7  * (i)}}">
+        <p class="display-5">{{(j + 7 - firstDayOfMonth + 2) + 7  * (i)}}</p>
+    </td>
+</tr>
+
+<tr>
+    <td *ngFor="let in of counter(daysInMonth - (7 - firstDayOfMonth + 1) - (numberOfWeeks - 2) * 7); let i = index" routerLink="/calendar/{{year}}/{{month}}/{{i + 7 * (numberOfWeeks - 1) - firstDayOfMonth + 2}}" class="col-1 text-center">
+        <p class="display-5">{{i + 7 * (numberOfWeeks - 1) - firstDayOfMonth + 2}}</p>
+    </td>
+    <td *ngFor="let in of counter(7 - (daysInMonth - (7 - firstDayOfMonth + 1) - (numberOfWeeks - 2) * 7))" class="col-1 text-center">
+
+    </td>
+</tr>

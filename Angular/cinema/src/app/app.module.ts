@@ -17,6 +17,9 @@ import { ShowAddComponent } from './shows/show-add/show-add.component';
 import { ShowEditComponent } from './shows/show-edit/show-edit.component';
 import { ShowDeleteComponent } from './shows/show-delete/show-delete.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CalendarComponent } from './calendar/calendar/calendar.component';
+import { CalendarGeneratorComponent } from './calendar/calendar-generator/calendar-generator.component';
+import { CalendarDayComponent } from './calendar/calendar-day/calendar-day.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { HttpClientModule } from '@angular/common/http';
     ShowsListComponent,
     ShowAddComponent,
     ShowEditComponent,
-    ShowDeleteComponent
+    ShowDeleteComponent,
+    CalendarComponent,
+    CalendarGeneratorComponent,
+    CalendarDayComponent
   ],
   imports: [
     BrowserModule,
