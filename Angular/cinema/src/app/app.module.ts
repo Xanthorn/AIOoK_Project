@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CalendarComponent } from './calendar/calendar/calendar.component';
 import { CalendarGeneratorComponent } from './calendar/calendar-generator/calendar-generator.component';
 import { CalendarDayComponent } from './calendar/calendar-day/calendar-day.component';
+import { ShowsCurrentComponent } from './shows/shows-current/shows-current.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { CalendarDayComponent } from './calendar/calendar-day/calendar-day.compo
     ShowDeleteComponent,
     CalendarComponent,
     CalendarGeneratorComponent,
-    CalendarDayComponent
+    CalendarDayComponent,
+    ShowsCurrentComponent
   ],
   imports: [
     BrowserModule,
