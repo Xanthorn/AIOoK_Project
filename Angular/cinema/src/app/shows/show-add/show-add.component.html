@@ -31,6 +31,10 @@
                             {{movie.title}}
                         </option>
                     </select>
+                    <div *ngIf="form.controls['movieId'].errors?.['required'] && form.controls['movieId'].touched"
+                        class="text-danger">
+                        Wybierz film z listy
+                    </div>
 
                     <br>
 
@@ -38,6 +42,10 @@
                     <div aria-label="date" class="input-group">
                         <input type="datetime-local" class="form-control" placeholder="20.01.2020"
                             formControlName="date">
+                    </div>
+                    <div *ngIf="form.controls['date'].errors?.['required'] && form.controls['date'].touched"
+                        class="text-danger">
+                        Wybierz datę seansu
                     </div>
 
                     <br>
@@ -48,6 +56,10 @@
                             Nr. sali: {{auditorium.number}} (Pojemność: {{auditorium.capacity}})
                         </option>
                     </select>
+                    <div *ngIf="form.controls['auditoriumId'].errors?.['required'] && form.controls['auditoriumId'].touched"
+                        class="text-danger">
+                        Wybierz salę kinową z listy
+                    </div>
 
                     <br>
 
