@@ -1,6 +1,6 @@
 <tr *ngFor="let show of shows| filter:filteredString">
     <td>
-        {{show.date | date:'medium'}}
+        {{show.date | date: 'dd/MM/yyyy h:mm'}}
     </td>
     <td>
         <a (click)="handleClickFilteredByTitle(show.movie.title)" >{{show.movie.title}}</a>
