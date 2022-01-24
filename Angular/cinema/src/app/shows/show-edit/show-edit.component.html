@@ -1,5 +1,18 @@
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row mt-4 mb-4" *ngIf="auditoriums.length == 0 || movies.length == 0">
+        <h1 class="display-4 text-center">😭 Nie można edytować filmu 😭</h1>
+    </div>
+    <div class="row mt-4 mb-4" *ngIf="auditoriums.length == 0">
+        <div class="col">
+            <h2 class="display-5 text-center">Nie udało się załadować list sal.</h2>
+        </div>
+    </div>
+    <div class="row mt-4 mb-4" *ngIf="movies.length == 0">
+        <div class="col">
+            <h2 class="display-5 text-center">Nie udało się załadować listy filmów.</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center" *ngIf="movies.length > 0 && auditoriums.length > 0">
         <div class="col-8">
             <div class="container border rounded mt-4">
                 <div class="row mt-4 mb-4">
@@ -18,6 +31,10 @@
                                     {{movie.title}}
                                 </option>
                             </select>
+                            <div *ngIf="form.controls['movieId'].errors?.['required'] && form.controls['movieId'].touched"
+                                class="text-danger">
+                                Wybierz film z listy
+                            </div>
 
                             <br>
 
@@ -25,6 +42,10 @@
                             <div aria-label="date" class="input-group">
                                 <input type="datetime-local" class="form-control" placeholder="20.01.2020"
                                     formControlName="date">
+                            </div>
+                            <div *ngIf="form.controls['date'].errors?.['required'] && form.controls['date'].touched"
+                                class="text-danger">
+                                Wybierz datę seansu
                             </div>
 
                             <br>
@@ -35,15 +56,20 @@
                                     Nr. sali: {{auditorium.number}} (Pojemność: {{auditorium.capacity}})
                                 </option>
                             </select>
+                            <div *ngIf="form.controls['auditoriumId'].errors?.['required'] && form.controls['auditoriumId'].touched"
+                                class="text-danger">
+                                Wybierz salę kinową z listy
+                            </div>
 
                             <br>
 
                             <div class="mb-3 container">
                                 <div class="row justify-content-center">
-                                    <div class="col-3 text-center">
-                                        <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Dodaj seans</button>
+                                    <div class="col-4 text-center">
+                                        <button class="btn btn-primary" type="submit"
+                                            [disabled]="form.invalid">Zatwierdź zmiany</button>
                                     </div>
-                                    <div class="col-3 text-center">
+                                    <div class="col-4 text-center">
                                         <a class="btn btn-outline-dark" routerLink="/shows">Anuluj</a>
                                     </div>
                                 </div>
