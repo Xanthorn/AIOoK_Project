@@ -18,6 +18,11 @@
                                     {{movie.title}}
                                 </option>
                             </select>
+                            <div *ngIf="form.controls['movieId'].errors?.['required'] && form.controls['movieId'].touched"
+                                class="text-danger">
+                                Wybierz film z listy
+                            </div>
+
 
                             <br>
 
@@ -26,6 +31,11 @@
                                 <input type="datetime-local" class="form-control" placeholder="20.01.2020"
                                     formControlName="date">
                             </div>
+                            <div *ngIf="form.controls['date'].errors?.['required'] && form.controls['date'].touched"
+                                class="text-danger">
+                                Wybierz datę seansu
+                            </div>
+
 
                             <br>
 
@@ -35,15 +45,20 @@
                                     Nr. sali: {{auditorium.number}} (Pojemność: {{auditorium.capacity}})
                                 </option>
                             </select>
+                            <div *ngIf="form.controls['auditoriumId'].errors?.['required'] && form.controls['auditoriumId'].touched"
+                                class="text-danger">
+                                Wybierz salę kinową z listy
+                            </div>
 
                             <br>
 
                             <div class="mb-3 container">
                                 <div class="row justify-content-center">
-                                    <div class="col-3 text-center">
-                                        <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Dodaj seans</button>
+                                    <div class="col-4 text-center">
+                                        <button class="btn btn-primary" type="submit"
+                                            [disabled]="form.invalid">Zatwierdź zmiany</button>
                                     </div>
-                                    <div class="col-3 text-center">
+                                    <div class="col-4 text-center">
                                         <a class="btn btn-outline-dark" routerLink="/shows">Anuluj</a>
                                     </div>
                                 </div>
