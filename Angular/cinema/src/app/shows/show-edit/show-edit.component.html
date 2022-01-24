@@ -38,10 +38,15 @@
 
                             <br>
 
-                            <div class="mb-3 text-center">
-                                <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Dodaj seans</button>
-                                <span></span>
-                                <a class="btn btn-outline-dark" routerLink="/shows">Anuluj</a>
+                            <div class="mb-3 container">
+                                <div class="row justify-content-center">
+                                    <div class="col-3 text-center">
+                                        <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Dodaj seans</button>
+                                    </div>
+                                    <div class="col-3 text-center">
+                                        <a class="btn btn-outline-dark" routerLink="/shows">Anuluj</a>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
