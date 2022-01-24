@@ -1,1 +1,62 @@
-<p>movie-popularity works!</p>
+<div class="container">
+    <div class="row pb-4">
+        <div class="col">
+            <h1 class="display-4 text-center">Sprawdź popularność filmu</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <form [formGroup]="form" (ngSubmit)="find()">
+
+                <label for="movie" class="form-label">Film</label>
+                <select class="form-select" formControlName="id" id="movie">
+                    <option *ngFor="let movie of movies" [value]="movie.id">
+                        {{movie.title}}
+                    </option>
+                </select>
+
+                <br>
+
+                <label for="data" class="form-label">Data</label>
+                <div aria-label="date" class="input-group">
+                    <input type="date" class="form-control" formControlName="date">
+                </div>
+
+                <br>
+
+                <div class="mb-3 text-center">
+                    <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Sprawdź</button>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="fetchedPopularityData != null" class="row">
+            <div class="col">
+                <h2 class="text-center">Popularność filmu w dniu {{selectDate | date: 'dd/MM/yyyy' }}</h2>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <table class="table table-responsive table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Liczba seansów</th>
+                                        <th class="text-center">Liczba sprzedanych biletów</th>
+                                        <th class="text-center">Liczba dostępnych biletów</th>
+                                        <th class="text-center">Łączna liczba biletów</th>
+                                        <th class="text-center">Procent zajętych miejsc</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <td>{{fetchedPopularityData.numberOfShows}}</td>
+                                    <td>{{fetchedPopularityData.soldTickets}}</td>
+                                    <td>{{fetchedPopularityData.availableTickets}}</td>
+                                    <td>{{fetchedPopularityData.soldTickets + fetchedPopularityData.availableTickets}}</td>
+                                    <td>{{fetchedPopularityData.soldTickets / (fetchedPopularityData.soldTickets + fetchedPopularityData.availableTickets) *100}}%</td>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
