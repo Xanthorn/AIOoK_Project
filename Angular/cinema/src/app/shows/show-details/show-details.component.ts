@@ -9,10 +9,24 @@ import { Show } from 'src/models/Show';
 export class ShowDetailsComponent implements OnInit {
 
   @Input("shows") shows: Show[] = [];
+
+  filtered: boolean = false;
+  filteredString: string = '';
+
   
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  
+  handleClickFilteredByTitle(filteredString: string){
+    if(this.filtered == false){
+      this.filtered = true;
+      this.filteredString = filteredString;
+    }
+    else{
+      this.filtered = false;
+      this.filteredString = '';
+    }
+  }
 }
