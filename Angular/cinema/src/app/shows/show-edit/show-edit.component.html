@@ -1,5 +1,18 @@
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row mt-4 mb-4" *ngIf="auditoriums.length == 0 || movies.length == 0">
+        <h1 class="display-4 text-center">😭 Nie można edytować filmu 😭</h1>
+    </div>
+    <div class="row mt-4 mb-4" *ngIf="auditoriums.length == 0">
+        <div class="col">
+            <h2 class="display-5 text-center">Nie udało się załadować list sal.</h2>
+        </div>
+    </div>
+    <div class="row mt-4 mb-4" *ngIf="movies.length == 0">
+        <div class="col">
+            <h2 class="display-5 text-center">Nie udało się załadować listy filmów.</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center" *ngIf="movies.length > 0 && auditoriums.length > 0">
         <div class="col-8">
             <div class="container border rounded mt-4">
                 <div class="row mt-4 mb-4">
@@ -23,7 +36,6 @@
                                 Wybierz film z listy
                             </div>
 
-
                             <br>
 
                             <label for="date" class="form-label">Data</label>
@@ -35,7 +47,6 @@
                                 class="text-danger">
                                 Wybierz datę seansu
                             </div>
-
 
                             <br>
 
