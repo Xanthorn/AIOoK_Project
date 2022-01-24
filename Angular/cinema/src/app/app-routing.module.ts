@@ -10,6 +10,7 @@ import { MovieListComponent } from './movies/movie-list/movie-list.component';
 import { ShowAddComponent } from './shows/show-add/show-add.component';
 import { ShowDeleteComponent } from './shows/show-delete/show-delete.component';
 import { ShowEditComponent } from './shows/show-edit/show-edit.component';
+import { ShowsCurrentComponent } from './shows/shows-current/shows-current.component';
 import { ShowsListComponent } from './shows/shows-list/shows-list.component';
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'shows/add', component: ShowAddComponent },
   { path: 'shows/edit/:id', component:ShowEditComponent },
   { path: 'shows/delete/:id', component: ShowDeleteComponent },
+  { path: 'shows/now', component: ShowsCurrentComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'calendar/:year/:month/:day', component: CalendarDayComponent }
 ];
