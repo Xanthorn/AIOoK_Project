@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row mt-4 mb-4*">
+        <div class="col">
+            <h1 class="display-4 text-center">Kup bilet</h1>
+        </div>
+    </div>
+    <div class="row" *ngIf="show == null">
+        <div class="col">
+            <h2 class="text-center">Nie udało się wczytać seansu</h2>
+        </div>
+    </div>
+    <div class="row" *ngIf="show != null">
+        <div class="col">
+            <h2 class="text-center">Wybierz miejsce na planie sali</h2>
+            <button class="btn btn-primary mb-4" (click)="buyTickets()" [disabled]="choosenSeats.length === 0">Kup bilet(y)</button>
+            <div>
+                <p>Wybrane miejsca:</p>
+                <p *ngFor="let seat of counter(choosenSeats.length); let i = index">{{choosenSeats[i]}}</p>
+            </div>
+            <table class="table table-info table-bordered">
+                <tbody>
+                    <tr *ngFor="let row of counter(show.auditorium.rows); let i = index;">
+                        <td class="text-center" *ngFor="let seat of counter(show.auditorium.seatsInRow); let j = index"
+                            [ngClass]="show.seats[j + show.auditorium.seatsInRow * i].isTaken ? 'table-danger' : 'table-success'"
+                            (click)="seatClicked(j + 1 + show.auditorium.seatsInRow * i)">{{j + 1 + show.auditorium.seatsInRow * i}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -22,6 +21,7 @@ import { CalendarGeneratorComponent } from './calendar/calendar-generator/calend
 import { CalendarDayComponent } from './calendar/calendar-day/calendar-day.component';
 import { ShowsCurrentComponent } from './shows/shows-current/shows-current.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { BuyTicketComponent } from './tickets/buy-ticket/buy-ticket.component';
 import { MoviePopularityComponent } from './movies/movie-popularity/movie-popularity.component';
 
 @NgModule({
@@ -44,6 +44,7 @@ import { MoviePopularityComponent } from './movies/movie-popularity/movie-popula
     CalendarDayComponent,
     ShowsCurrentComponent,
     FilterPipe,
+    BuyTicketComponent,
     MoviePopularityComponent
   ],
   imports: [

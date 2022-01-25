@@ -42,6 +42,6 @@ export class ShowsService {
   }
 
   buyTickets(id: string, request: BuyTicketsRequest) {
-    return this.httpClient.put<any>(`${this.baseUrl}/${id}/buy-tickets`, request).toPromise();
+    return this.httpClient.patch<any>(`${this.baseUrl}/${id}/buy-tickets`, request).toPromise();
   }
 }

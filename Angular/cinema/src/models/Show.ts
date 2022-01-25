@@ -1,5 +1,6 @@
 import { Auditorium } from "./Auditorium";
 import { Movie } from "./Movie";
+import { Seat } from "./Seat";
 
 export class Show {
     id: string;
@@ -8,6 +9,7 @@ export class Show {
     auditorium: Auditorium;
     soldTickets: number;
     availableTickets: number;
+    seats: Seat[];
 
     constructor() {
         this.id = '',
@@ -16,5 +18,6 @@ export class Show {
         this.auditorium = new Auditorium,
         this.soldTickets = 0,
         this.availableTickets = 0
+        this.seats = [];
     }
 }

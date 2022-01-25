@@ -13,6 +13,7 @@ import { ShowDeleteComponent } from './shows/show-delete/show-delete.component';
 import { ShowEditComponent } from './shows/show-edit/show-edit.component';
 import { ShowsCurrentComponent } from './shows/shows-current/shows-current.component';
 import { ShowsListComponent } from './shows/shows-list/shows-list.component';
+import { BuyTicketComponent } from './tickets/buy-ticket/buy-ticket.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -27,7 +28,8 @@ const routes: Routes = [
   { path: 'shows/delete/:id', component: ShowDeleteComponent },
   { path: 'shows/now', component: ShowsCurrentComponent },
   { path: 'calendar', component: CalendarComponent },
-  { path: 'calendar/:year/:month/:day', component: CalendarDayComponent }
+  { path: 'calendar/:year/:month/:day', component: CalendarDayComponent },
+  { path: 'shows/buy-ticket/:id', component: BuyTicketComponent}
 ];
 
 @NgModule({
