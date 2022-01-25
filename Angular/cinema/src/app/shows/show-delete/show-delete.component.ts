@@ -18,7 +18,7 @@ export class ShowDeleteComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.id = this.route.snapshot.paramMap.get('id');
 
-    if(this.id !== null) {
+    if (this.id !== null) {
       this.show = await this.showsService.getShowById(this.id);
     }
   }

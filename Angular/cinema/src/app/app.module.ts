@@ -22,6 +22,7 @@ import { CalendarGeneratorComponent } from './calendar/calendar-generator/calend
 import { CalendarDayComponent } from './calendar/calendar-day/calendar-day.component';
 import { ShowsCurrentComponent } from './shows/shows-current/shows-current.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { BuyTicketComponent } from './tickets/buy-ticket/buy-ticket.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     CalendarGeneratorComponent,
     CalendarDayComponent,
     ShowsCurrentComponent,
-    FilterPipe
+    FilterPipe,
+    BuyTicketComponent
   ],
   imports: [
     BrowserModule,
