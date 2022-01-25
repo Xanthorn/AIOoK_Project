@@ -51,6 +51,8 @@ export class ShowEditComponent implements OnInit {
     if(this.id !== null) {
       this.show = await this.showsService.getShowById(this.id);
       this.form.patchValue(this.show!);
+      this.form.controls["auditoriumId"].patchValue(this.show?.auditorium.id);
+      this.form.controls["movieId"].patchValue(this.show?.movie.id);
     }
   }
 
